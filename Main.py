@@ -3,6 +3,8 @@ from tkinter import *
 import ttkbootstrap as tb
 from PIL import Image, ImageTk
 
+#check
+
 #MySQL connection
 mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
