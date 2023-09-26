@@ -112,7 +112,6 @@ def p_eye_toggle():
 
 #Account system
 
-# Initialize the logger
 logging.basicConfig(filename='login_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
@@ -150,6 +149,35 @@ def admin_login():
             LA_title1.config(text="Login failed")
     else:
         LA_title1.config(text="Please enter both username and password")
+
+def plogin(username, password):
+    q=f"select * from information where Player_ID = '{username}' and Password= {password}"
+    cur.execute(q)
+    record=cur.fetchall
+    if record==[]:
+        return False
+    else:
+        return True
+
+def player_login():
+    global Pus2, Ppw2
+    username=Pus2.get()
+    Aus2.delete(0, END)
+    password=Ppw2.get()
+    Apw2.delete(0, END)
+    try:
+        x=int(password)
+        if username and password:
+           if plogin(username, password):
+            LP1.tkraise()
+           else:
+            LP_title1.config(text="Login failed")
+        else:
+            LP_title1.config(text="Please enter both username and password")
+    except:
+        LP_title1.config(text="invalid password")
+    
+
 
 #page swap definitions
 def admin_login_swap():
@@ -214,15 +242,28 @@ def dt(team):
         table2.insert_row('end', row)
     table2.load_table_data()
 
+score=''
+scoremessage=StringVar()
+scoremessage.set('')
 def team_score(team):
-    pass
-
+    global score, scoremessage
+    if team==1:
+        team='team1'
+    elif team==2:
+        team='team2'
+    q_2=f'select sum(Player_Score) from {team}'
+    cur.execute(q_2)
+    for i in cur:
+        score = i[0]
+    scoremessage.set(f'The team score is {score}')
 
 #Frames
 L1=tb.Frame(root)
 LA=tb.Frame(root)
 LP=tb.Frame(root)
 LA1=tb.Frame(root)
+LP1=tb.Frame(root) #mid login player
+MP=tb.Frame(root) #post login player
 
 M1=tb.Frame(root)
 
@@ -284,7 +325,7 @@ load=tb.Label(LA1)
 #LP items
 LP_1=tb.Frame(LP)
 LP_2=tb.Frame(LP)
-LP_title=tb.Label(LP, text='ADMIN LOGIN', font=('Times bold', 20), padding=5)
+LP_title=tb.Label(LP, text='PLAYER LOGIN', font=('Times bold', 20), padding=5)
 LP_title1=tb.Label(LP, text='Enter Username and Password', font=('Times bold', 15))
 LP_back=tb.Button(LP, text='Back', command=logout)
 Pus1=tb.Label(LP_1, text='Username')
@@ -292,6 +333,7 @@ Ppw1=tb.Label(LP_2, text='Password')
 Pus2=tb.Entry(LP_1)
 Ppw2=tb.Entry(LP_2, show='*')
 Peye=tb.Button(LP_2, image=see, command=p_eye_toggle)
+submit2=tb.Button(LP, text='Submit', command=player_login)
 
 Pus1.pack(side='left')
 Pus2.pack(side='left')
@@ -302,6 +344,7 @@ LP_title.pack(pady=20)
 LP_title1.pack(pady=(20,20))
 LP_1.pack()
 LP_2.pack()
+submit2.pack()
 LP_back.pack()
 
 #M1 items
@@ -356,14 +399,14 @@ area.pack()
 mainmenu9.pack()
 
 #f2 items
-f2_title=tb.Label(f2, text='Display', font=('Times bold', 12), relief='groove', padding=2)
+f2_title=tb.Label(f2, text='Display Team', font=('Times bold', 12), relief='groove', padding=2)
 f2_title1=tb.Label(f2, text='Select a team to view members')
 f2_1=tb.Frame(f2)
 dteam1=tb.Button(f2_1, text='Team 1', command=lambda: dt(1))
 dteam2=tb.Button(f2_1, text='Team 2', command=lambda: dt(2))
 area2=tb.Text(f2, height= 15, width= 52, relief='sunken', state='disable')
 
-coldata=[{'text':'Tag'}, {'text':'Player ID'}, {'text':'Role'}, {'text':'Score'} ]
+coldata=[{'text':'Tag', "stretch": False}, {'text':'Player ID', "stretch": False}, {'text':'Role', "stretch": False}, {'text':'Score', "stretch": False} ]
 
 table2=Tableview(
     master=f2,
@@ -373,6 +416,7 @@ table2=Tableview(
     searchable=False,
     bootstyle=PRIMARY,
     stripecolor=(colors.light, None),
+    height=4,
 )
 mainmenu9=tb.Button(f2, text='Main Menu', command=mainmenu)
 
@@ -385,9 +429,21 @@ area2.pack()
 mainmenu9.pack(side='bottom')
 
 #f3 items
+f3_title=tb.Label(f3, text='Display Team Score', font=('Times bold', 12), relief='groove', padding=2)
+f3_title1=tb.Label(f3, text='Select a team to view team score')
+f3_1=tb.Frame(f3)
+steam1=tb.Button(f3_1, text='Team 1', command=lambda: team_score(1))
+steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))
 mainmenu9=tb.Button(f3, text='Main Menu', command=mainmenu)
+scorelabel=tb.Label(f3, textvariable=scoremessage)
 
-mainmenu9.pack()
+f3_title.pack()
+f3_title1.pack()
+steam1.pack(side='left')
+steam2.pack(side='left')
+f3_1.pack()
+scorelabel.pack()
+mainmenu9.pack(side='bottom')
 
 #f4 items
 mainmenu9=tb.Button(f4, text='Main Menu', command=mainmenu)
@@ -422,7 +478,7 @@ mainmenu9.pack()
 #Main frames set up
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
-frames=[L1,LA,LP,LA1,M1,f1,f2,f3,f4,f5,f6,f7,f8,f9]
+frames=[L1,LA,LP,LA1,LP1,M1,f1,f2,f3,f4,f5,f6,f7,f8,f9]
 for frame in frames:
     frame.grid(row=0, column=0, sticky="nsew")
 
