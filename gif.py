@@ -6,12 +6,12 @@ def update_gif(canvas, img, frame_index):
     root.after(100, update_gif, canvas, img, (frame_index + 1) % len(img))
 
 root = tk.Tk()
-root.geometry("500x500")  # Set the window size
+root.geometry("960x540")  # Set the window size
 
 def gif():
     global bg_img
     # Load the animated GIF image
-    gif_path = "C:\\Users\\USER\\Downloads\\anime.gif"
+    gif_path = "loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
 
