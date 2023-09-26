@@ -1,6 +1,8 @@
 import mysql.connector as mc
 from tkinter import *
 import ttkbootstrap as tb
+from ttkbootstrap.tableview import Tableview
+from ttkbootstrap.constants import *
 from PIL import Image, ImageTk, ImageSequence
 import hashlib
 import logging
@@ -19,7 +21,7 @@ root.title('eSports Management System')
 root.iconbitmap('EMS.ico')
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
-
+colors=root.style.colors
 
 #Images
 admin1=Image.open('admin.png')
@@ -182,6 +184,8 @@ def f9_swap():
 um_content=''
 def um(team):
     global um_content, area
+    area.config(state='normal')
+    um_content=''
     if team==1:
         q_1="select * from schedule where Participant='team1'"
     elif team==2:
@@ -190,7 +194,30 @@ def um(team):
     records = cur.fetchall()
     for row in records:
         um_content+=f'League: {row[0]} \n Date: {row[1]} \n Participant: {row[2]} \n Price: {row[3]} $ \n\n'
-    area.insert()
+    area.delete("1.0", END)
+    area.insert("1.0", um_content)
+    area.config(state='disable')
+
+rowdata=[]
+def dt(team):
+    table2.delete_rows()
+    global rowdata
+    area2.forget()
+    table2.pack()
+    if team==1:
+        team='team1'
+    elif team==2:
+        team='team2'
+    cur.execute(f"select * from {team}")
+    records = cur.fetchall()
+    for row in records:
+        table2.insert_row('end', row)
+    table2.load_table_data()
+
+def team_score(team):
+    pass
+
+
 #Frames
 L1=tb.Frame(root)
 LA=tb.Frame(root)
@@ -317,7 +344,7 @@ f1_title1=tb.Label(f1, text='Select a team to view their upcoming matches')
 f1_1=tb.Frame(f1)
 team1=tb.Button(f1_1, text='Team 1', command=lambda: um(1))
 team2=tb.Button(f1_1, text='Team 2', command=lambda: um(2))
-area=tb.Text(f1, height= 15, width= 52, relief='sunken', state='disabled')
+area=tb.Text(f1, height= 15, width= 52, relief='sunken', state='disable')
 mainmenu9=tb.Button(f1, text='Main Menu', command=mainmenu)
 
 f1_title.pack()
@@ -329,9 +356,33 @@ area.pack()
 mainmenu9.pack()
 
 #f2 items
+f2_title=tb.Label(f2, text='Display', font=('Times bold', 12), relief='groove', padding=2)
+f2_title1=tb.Label(f2, text='Select a team to view members')
+f2_1=tb.Frame(f2)
+dteam1=tb.Button(f2_1, text='Team 1', command=lambda: dt(1))
+dteam2=tb.Button(f2_1, text='Team 2', command=lambda: dt(2))
+area2=tb.Text(f2, height= 15, width= 52, relief='sunken', state='disable')
+
+coldata=[{'text':'Tag'}, {'text':'Player ID'}, {'text':'Role'}, {'text':'Score'} ]
+
+table2=Tableview(
+    master=f2,
+    coldata=coldata,
+    rowdata=rowdata,
+    paginated=False,
+    searchable=False,
+    bootstyle=PRIMARY,
+    stripecolor=(colors.light, None),
+)
 mainmenu9=tb.Button(f2, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+f2_title.pack()
+f2_title1.pack()
+dteam1.pack(side='left')
+dteam2.pack(side='left')
+f2_1.pack()
+area2.pack()
+mainmenu9.pack(side='bottom')
 
 #f3 items
 mainmenu9=tb.Button(f3, text='Main Menu', command=mainmenu)
