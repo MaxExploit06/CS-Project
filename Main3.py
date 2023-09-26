@@ -179,9 +179,18 @@ def f9_swap():
     f9.tkraise()
 
 #sql connectivity functions
+um_content=''
 def um(team):
-    pass
-
+    global um_content, area
+    if team==1:
+        q_1="select * from schedule where Participant='team1'"
+    elif team==2:
+        q_1="select * from schedule where Participant='team2'"
+    cur.execute(q_1)
+    records = cur.fetchall()
+    for row in records:
+        um_content+=f'League: {row[0]} \n Date: {row[1]} \n Participant: {row[2]} \n Price: {row[3]} $ \n\n'
+    area.insert()
 #Frames
 L1=tb.Frame(root)
 LA=tb.Frame(root)
