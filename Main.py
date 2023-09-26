@@ -12,17 +12,25 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap('D:\\Project\\EMS.ico')
+root.iconbitmap('EMS.ico')
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=1
 
-#variables
-admin1=Image.open('D:\\Project\\admin.png')
-player1=Image.open('D:\\Project\\player.png')
+#Images
+admin1=Image.open('admin.png')
+player1=Image.open('player.png')
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
+
+see1=Image.open('see.png')
+hide1=Image.open('hide.png')
+resized_see = see1.resize((16, 16))
+resized_hide = hide1.resize((16, 16))
+see=ImageTk.PhotoImage(resized_see)
+hide=ImageTk.PhotoImage(resized_hide)
+t1=1
 
 #other definitions
 def themeswap():
@@ -37,15 +45,27 @@ def themeswap():
 def logout():
     L1.tkraise()
 
+def eye_toggle():
+    global pw2, eye, t1
+    if t1==1:
+        pw2.config(show= '')
+        eye.config(image=hide)
+        t1=0
+    elif t1==0:
+        pw2.config(show='*')
+        eye.config(image=see)
+        t1=1
+
 #page swap definitions
 def admin_login():
-    pass
+    LA.tkraise()
 def player_login():
-    pass
+    LP.tkraise()
 
 #Frames
 L1=tb.Frame(root)
 LA=tb.Frame(root)
+LP=tb.Frame(root)
 
 M1=tb.Frame(root)
 
@@ -75,10 +95,41 @@ b_admin.pack(side='left', padx=40 )
 b_player.pack(side='left', padx=40)
 L1_title2.pack()
 
+#LA items
+LA_1=tb.Frame(LA)
+LA_2=tb.Frame(LA)
+LA_title=tb.Label(LA, text='ADMIN LOGIN', font=('Times bold', 20), padding=5)
+LA_title1=tb.Label(LA, text='Enter Username and Password', font=('Times bold', 15))
+LA_back=tb.Button(LA, text='Back', command=logout)
+us1=tb.Label(LA_1, text='Username')
+pw1=tb.Label(LA_2, text='Password')
+us2=tb.Entry(LA_1)
+pw2=tb.Entry(LA_2, show='*')
+eye=tb.Button(LA_2, image=see, command=eye_toggle)
 
+us1.pack(side='left')
+us2.pack(side='left')
+pw1.pack(side='left')
+pw2.pack(side='left')
+eye.pack(side='left')
+LA_title.pack(pady=20)
+LA_title1.pack(pady=(20,20))
+LA_1.pack()
+LA_2.pack()
+LA_back.pack()
+
+#LP items
+LP_back=tb.Button(LP, text='Back', command=logout)
+
+LP_back.pack()
+
+#Main frames set up
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
-L1.grid(row=0, column=0, sticky="nsew")
-LA.grid(row=0, column=0, sticky="nsew")
+frames=[L1,LA,LP]
+for frame in frames:
+    frame.grid(row=0, column=0, sticky="nsew")
+
 logout()
+
 root.mainloop()
