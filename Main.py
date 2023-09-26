@@ -6,6 +6,8 @@ import hashlib
 import logging
 import time
 
+#check
+
 #MySQL connection
 mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
