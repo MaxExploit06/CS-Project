@@ -1,0 +1,7 @@
+2023-09-25 17:18:24,616 - Login attempt: User 'MaxExploit' - failed
+2023-09-25 17:19:01,668 - Login attempt: User 'TheFallen' - success
+2023-09-25 17:19:36,129 - Login attempt: User 'TheFallen' - success
+2023-09-25 17:21:53,181 - Login attempt: User 'MaxExploit' - failed
+2023-09-25 17:22:31,486 - Login attempt: User 'MaxExploit' - success
+2023-09-25 17:42:52,408 - Login attempt: User 'MaxExploit' - success
+2023-09-25 17:46:06,682 - Login attempt: User 'MaxExploit' - success
