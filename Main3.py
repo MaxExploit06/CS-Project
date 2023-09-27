@@ -45,6 +45,12 @@ def update_gif(canvas, img, frame_index):
     else:
         root.after(30, update_gif, canvas, img, (frame_index + 1) % len(img))
 
+def update_gif2(canvas, img, frame_index):
+    canvas.itemconfig(bg_img, image=img[frame_index])
+    if frame_index==56:
+        MP.tkraise()
+    else:
+        root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
 
 def gif():
     LA1.tkraise()
@@ -65,6 +71,28 @@ def gif():
 
     # Start the animation loop
     update_gif(canvas, frames, 0)
+    
+    # Add other widgets and functionality here
+
+def gif2():
+    LP1.tkraise()
+    global bg_img
+    # Load the animated GIF image
+    gif_path = "loading.gif"
+    gif = Image.open(gif_path)
+    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
+
+    # Create a Canvas widget to display the GIF background
+    canvas = tb.Canvas(LP1, width=800, height=600)
+    LP1.grid_rowconfigure(0, weight=1)
+    LP1.grid_columnconfigure(0, weight=1)
+    canvas.grid(row=0,column=0, sticky="nsew")
+
+    # Create a background image on the Canvas
+    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
+
+    # Start the animation loop
+    update_gif2(canvas, frames, 0)
     
     # Add other widgets and functionality here
     
@@ -108,7 +136,8 @@ def p_eye_toggle():
         Peye.config(image=see)
         t2=1
 
-
+def messageclear(label):
+    label.forget()
 
 #Account system
 
@@ -170,6 +199,7 @@ def player_login():
         if username and password:
            if plogin(username, password):
             LP1.tkraise()
+            gif2()
            else:
             LP_title1.config(text="Login failed")
         else:
@@ -256,6 +286,38 @@ def team_score(team):
     for i in cur:
         score = i[0]
     scoremessage.set(f'The team score is {score}')
+
+def addplayer():
+    tag=pe1.get()
+    id=pe2.get()
+    role=pe3.get()
+    score=pe4.get()
+    name=pe5.get()
+    region=pe6.get()
+    rank=pe7.get()
+    ppassword=pe8.get()
+    q4=f"insert into information values({tag},'{id}','{role}',{score},'{name}','{region}',{rank},{ppassword})"
+    try:
+        cur.execute(q4)
+        success4.pack()
+        root.after(2000, messageclear, success4)
+    except:
+        fail4.pack()
+        root.after(2000, messageclear, fail4)
+
+def addum():
+    name=ume1.get()
+    date=ume2.get()
+    team=ume3.get()
+    prize=ume4.get()
+    q5=f"insert into schedule values('{name}','{date}','{team}',{prize})"
+    try:
+        cur.execute(q5)
+        success5.pack()
+        root.after(2000, messageclear, success5)
+    except:
+        fail5.pack()
+        root.after(2000, messageclear, fail5)
 
 #Frames
 L1=tb.Frame(root)
@@ -446,14 +508,89 @@ scorelabel.pack()
 mainmenu9.pack(side='bottom')
 
 #f4 items
+entryframe4=tb.Frame(f4)
+f4_title=tb.Label(f4, text='Add Player', font=('Times bold', 12), relief='groove', padding=2)
+f4_title1=tb.Label(f4, text='Input Details')
+pe1=tb.Entry(entryframe4)
+pe2=tb.Entry(entryframe4)
+pe3=tb.Entry(entryframe4)
+pe4=tb.Entry(entryframe4)
+pe5=tb.Entry(entryframe4)
+pe6=tb.Entry(entryframe4)
+pe7=tb.Entry(entryframe4)
+pe8=tb.Entry(entryframe4)
+pl1=tb.Label(entryframe4, text='Tag')
+pl2=tb.Label(entryframe4, text='Player ID')
+pl3=tb.Label(entryframe4, text='Role')
+pl4=tb.Label(entryframe4, text='Score')
+pl5=tb.Label(entryframe4, text='Name')
+pl6=tb.Label(entryframe4, text='Region')
+pl7=tb.Label(entryframe4, text='Regional rank')
+pl8=tb.Label(entryframe4, text='Set password')
+submit4=tb.Button(f4, text='Submit', command=addplayer)
+success4=tb.Label(f4, text='Added succesfully')
+fail4=tb.Label(f4, text='Unsuccesful')
 mainmenu9=tb.Button(f4, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+
+f4_title.pack()
+f4_title1.pack()
+
+pe1.grid(row= 0, column= 1)
+pe2.grid(row= 1, column= 1)
+pe3.grid(row= 2, column= 1)
+pe4.grid(row= 3, column= 1)
+pe5.grid(row= 4, column= 1)
+pe6.grid(row= 5, column= 1)
+pe7.grid(row= 6, column= 1)
+pe8.grid(row= 7, column= 1)
+pl1.grid(row= 0, column= 0)
+pl2.grid(row= 1, column= 0)
+pl3.grid(row= 2, column= 0)
+pl4.grid(row= 3, column= 0)
+pl5.grid(row= 4, column= 0)
+pl6.grid(row= 5, column= 0)
+pl7.grid(row= 6, column= 0)
+pl8.grid(row= 7, column= 0)
+
+entryframe4.pack()
+submit4.pack()
+mainmenu9.pack(side='bottom')
 
 #f5 items
+entryframe5=tb.Frame(f5)
+f5_title=tb.Label(f5, text='Add Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
+f5_title1=tb.Label(f5, text='Input Details')
+ume1=tb.Entry(entryframe5)
+ume2=tb.Entry(entryframe5)
+ume3=tb.Entry(entryframe5)
+ume4=tb.Entry(entryframe5)
+uml1=tb.Label(entryframe5, text='League')
+uml2=tb.Label(entryframe5, text='Date')
+uml3=tb.Label(entryframe5, text='Participants')
+uml4=tb.Label(entryframe5, text='Price')
+
+submit5=tb.Button(f5, text='Submit', command=addum)
+success5=tb.Label(f5, text='Added succesfully')
+fail5=tb.Label(f5, text='Unsuccesful')
 mainmenu9=tb.Button(f5, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+
+f5_title.pack()
+f5_title1.pack()
+
+ume1.grid(row= 0, column= 1)
+ume2.grid(row= 1, column= 1)
+ume3.grid(row= 2, column= 1)
+ume4.grid(row= 3, column= 1)
+uml1.grid(row= 0, column= 0)
+uml2.grid(row= 1, column= 0)
+uml3.grid(row= 2, column= 0)
+uml4.grid(row= 3, column= 0)
+
+entryframe5.pack()
+submit5.pack()
+mainmenu9.pack(side='bottom')
 
 #f6 items
 mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
