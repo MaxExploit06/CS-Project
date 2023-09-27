@@ -1,3 +1,4 @@
+from faulthandler import disable
 import mysql.connector as mc
 from tkinter import *
 import ttkbootstrap as tb
@@ -37,6 +38,10 @@ resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 see=ImageTk.PhotoImage(resized_see)
 hide=ImageTk.PhotoImage(resized_hide)
+
+search1=Image.open('search.png')
+resized_search = search1.resize((16, 16))
+isearch=ImageTk.PhotoImage(resized_search)
 
 def update_gif(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
@@ -138,6 +143,17 @@ def p_eye_toggle():
 
 def messageclear(label):
     label.forget()
+
+def on_entry_click(event):
+    """function that gets called whenever entry is clicked"""
+    if s_tag.get() == 'Enter player tag':
+       s_tag.delete(0, "end") # delete all the text in the entry
+       s_tag.insert(0, '') #Insert blank for user input
+       s_tag.config(foreground='')
+def on_focusout(event):
+    if s_tag.get() == '':
+        s_tag.insert(0, 'Enter player tag')
+        s_tag.config(foreground='grey')
 
 #Account system
 
@@ -318,6 +334,37 @@ def addum():
     except:
         fail5.pack()
         root.after(2000, messageclear, fail5)
+
+def search():
+    outputframe6.forget()
+    for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
+        entry.config(state='normal')
+        entry.delete(0, 'end')
+    tag=s_tag.get()
+    try:
+        x=int(tag)
+        q_5 = f"Select * from information where Tag = '{tag}'"
+        cur.execute(q_5)
+        records = cur.fetchall()
+        if records == []:
+            fail6_1.pack()
+            root.after(1000, messageclear, fail6_1)
+        for row in records:
+            ope1.insert(0, str(row[0]) )
+            ope2.insert(0, str(row[1]) )
+            ope3.insert(0, str(row[2]) )
+            ope4.insert(0, str(row[3]) )
+            ope5.insert(0, str(row[4]) )
+            ope6.insert(0, str(row[5]) )
+            ope7.insert(0, str(row[6]) )
+            outputframe6.pack()
+    except:
+        fail6_2.pack()
+        root.after(1000, messageclear, fail6_2)
+    for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
+        
+        entry.config(state='disabled')
+
 
 #Frames
 L1=tb.Frame(root)
@@ -593,9 +640,55 @@ submit5.pack()
 mainmenu9.pack(side='bottom')
 
 #f6 items
+outputframe6=tb.Frame(f6)
+searchbar=tb.Frame(f6)
+f6_title=tb.Label(f6, text='Search Players', font=('Times bold', 12), relief='groove', padding=2)
+s_tag=tb.Entry(searchbar,)
+s_tag.insert(0, 'Enter player tag')
+s_tag.config(foreground='grey')
+s_tag.bind('<FocusIn>', on_entry_click)
+s_tag.bind('<FocusOut>', on_focusout)
+
+ope1=tb.Entry(outputframe6, state='disabled')
+ope2=tb.Entry(outputframe6, state='disabled')
+ope3=tb.Entry(outputframe6, state='disabled')
+ope4=tb.Entry(outputframe6, state='disabled')
+ope5=tb.Entry(outputframe6, state='disabled')
+ope6=tb.Entry(outputframe6, state='disabled')
+ope7=tb.Entry(outputframe6, state='disabled')
+opl1=tb.Label(outputframe6, text='Tag')
+opl2=tb.Label(outputframe6, text='Player ID')
+opl3=tb.Label(outputframe6, text='Role')
+opl4=tb.Label(outputframe6, text='Score')
+opl5=tb.Label(outputframe6, text='Name')
+opl6=tb.Label(outputframe6, text='Region')
+opl7=tb.Label(outputframe6, text='Regional rank')
+
+fail6_1=tb.Label(f6, text='Player not found')
+fail6_2=tb.Label(f6, text='Invalid tag')
+s_button=tb.Button(searchbar, image=isearch, command=search)
 mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+ope1.grid(row= 0, column= 1)
+ope2.grid(row= 1, column= 1)
+ope3.grid(row= 2, column= 1)
+ope4.grid(row= 3, column= 1)
+ope5.grid(row= 4, column= 1)
+ope6.grid(row= 5, column= 1)
+ope7.grid(row= 6, column= 1)
+opl1.grid(row= 0, column= 0)
+opl2.grid(row= 1, column= 0)
+opl3.grid(row= 2, column= 0)
+opl4.grid(row= 3, column= 0)
+opl5.grid(row= 4, column= 0)
+opl6.grid(row= 5, column= 0)
+opl7.grid(row= 6, column= 0)
+
+f6_title.pack()
+s_tag.pack(side='left')
+s_button.pack(side='left')
+searchbar.pack()
+mainmenu9.pack(side='bottom')
 
 #f7 items
 mainmenu9=tb.Button(f7, text='Main Menu', command=mainmenu)
