@@ -364,6 +364,16 @@ def search():
     for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
         entry.config(state='disabled')
 
+#temp
+def aa():
+    f6_1_1_1.pack()
+def ab():
+    success6.pack()
+def ac():
+    f6_1_2.pack()
+def ad():
+    f6_1_2_1.pack()
+
 
 #Frames
 L1=tb.Frame(root)
@@ -639,9 +649,57 @@ submit5.pack()
 mainmenu9.pack(side='bottom')
 
 #f6 items
+f6_1=tb.Frame(f6)
+f6_1_1=tb.Frame(f6)
+f6_1_1_1=tb.Frame(f6)
+f6_1_1_1a=tb.Frame(f6_1_1_1)
+f6_1_1_1b=tb.Frame(f6_1_1_1)
+f6_1_2=tb.Frame(f6)
+f6_1_2_1=tb.Frame(f6)
+f6_1_2_1a=tb.Frame(f6_1_2_1)
+f6_1_2_1b=tb.Frame(f6_1_2_1)
+
+b6_1=tb.Button(f6_1, text='Between Teams', command=aa)
+b6_2=tb.Button(f6_1, text='From Reserve to Teams', command=ac)
+l6_1=tb.Label(f6_1_1_1a,text="Enter Tag of player to swap from Team 1")
+l6_2=tb.Label(f6_1_1_1b,text="Enter Tag of player to swap from Team 2")
+e6_1=tb.Entry(f6_1_1_1a)
+e6_2=tb.Entry(f6_1_1_1b)
+submit6_1=tb.Button(f6_1_1_1, text='SUBMIT', command=ab)
+b6_2_1=tb.Button(f6_1_2, text='To Team1', command=ad)
+b6_2_2=tb.Button(f6_1_2, text='To Team2')
+l6_1a=tb.Label(f6_1_2_1a,text="Enter Tag of player from reserve")
+l6_2a=tb.Label(f6_1_2_1b,text="Enter Tag of player to swap to team")
+e6_1a=tb.Entry(f6_1_2_1a)
+e6_2a=tb.Entry(f6_1_2_1b)
+submit6_1a=tb.Button(f6_1_2_1,  text='SUBMIT', command=ab)
+
+f6_title=tb.Label(f6, text='Swap Players', font=('Times bold', 12), relief='groove', padding=2)
+success6=tb.Label(f6, text='Swap succesfull!!')
 mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+b6_1.pack()
+b6_2.pack()
+l6_1.pack(side='left')
+e6_1.pack(side='left')
+f6_1_1_1a.pack(side='left')
+l6_2.pack(side='left')
+e6_2.pack(side='left')
+f6_1_1_1b.pack(side='left')
+submit6_1.pack()
+b6_2_1.pack(side='left')
+b6_2_2.pack(side='left')
+l6_1a.pack(side='left')
+e6_1a.pack(side='left')
+f6_1_2_1a.pack(side='left')
+l6_2a.pack(side='left')
+e6_2a.pack(side='left')
+f6_1_2_1b.pack(side='left')
+submit6_1a.pack()
+
+f6_title.pack()
+f6_1.pack()
+mainmenu9.pack(side='bottom')
 
 #f7 items
 outputframe7=tb.Frame(f7)
