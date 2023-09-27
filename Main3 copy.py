@@ -298,8 +298,15 @@ def addplayer():
     rank=pe7.get()
     ppassword=pe8.get()
     q4=f"insert into information values({tag},'{id}','{role}',{score},'{name}','{region}',{rank},{ppassword})"
-    cur.execute(q4)
-    success4.pack()
+    try:
+        cur.execute(q4)
+        success4.pack()
+        '''time.sleep(2)
+        success4.forget()'''
+    except:
+        fail4.pack()
+        '''time.sleep(2)
+        fail4.forget()'''
         
 
 
@@ -503,14 +510,14 @@ pe5=tb.Entry(entryframe4)
 pe6=tb.Entry(entryframe4)
 pe7=tb.Entry(entryframe4)
 pe8=tb.Entry(entryframe4)
-pl1=tb.Label(entryframe4)
-pl2=tb.Label(entryframe4)
-pl3=tb.Label(entryframe4)
-pl4=tb.Label(entryframe4)
-pl5=tb.Label(entryframe4)
-pl6=tb.Label(entryframe4)
-pl7=tb.Label(entryframe4)
-pl8=tb.Label(entryframe4)
+pl1=tb.Label(entryframe4, text='Tag')
+pl2=tb.Label(entryframe4, text='Player ID')
+pl3=tb.Label(entryframe4, text='Role')
+pl4=tb.Label(entryframe4, text='Score')
+pl5=tb.Label(entryframe4, text='Name')
+pl6=tb.Label(entryframe4, text='Region')
+pl7=tb.Label(entryframe4, text='Regional rank')
+pl8=tb.Label(entryframe4, text='Set password')
 submit4=tb.Button(f4, text='Submit', command=addplayer)
 success4=tb.Label(f4, text='Added succesfully')
 fail4=tb.Label(f4, text='Unsuccesful')
