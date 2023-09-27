@@ -336,10 +336,10 @@ def addum():
         root.after(2000, messageclear, fail5)
 
 def search():
-    outputframe6.forget()
+    outputframe7.forget()
     for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
         entry.config(state='normal')
-        entry.delete(0, 'end')
+        entry.delete(1.0, 'end')
     tag=s_tag.get()
     try:
         x=int(tag)
@@ -347,22 +347,21 @@ def search():
         cur.execute(q_5)
         records = cur.fetchall()
         if records == []:
-            fail6_1.pack()
-            root.after(1000, messageclear, fail6_1)
+            fail7_1.pack()
+            root.after(2000, messageclear, fail7_1)
         for row in records:
-            ope1.insert(0, str(row[0]) )
-            ope2.insert(0, str(row[1]) )
-            ope3.insert(0, str(row[2]) )
-            ope4.insert(0, str(row[3]) )
-            ope5.insert(0, str(row[4]) )
-            ope6.insert(0, str(row[5]) )
-            ope7.insert(0, str(row[6]) )
-            outputframe6.pack()
+            ope1.insert(1.0, str(row[0]) )
+            ope2.insert(1.0, str(row[1]) )
+            ope3.insert(1.0, str(row[2]) )
+            ope4.insert(1.0, str(row[3]) )
+            ope5.insert(1.0, str(row[4]) )
+            ope6.insert(1.0, str(row[5]) )
+            ope7.insert(1.0, str(row[6]) )
+            outputframe7.pack()
     except:
-        fail6_2.pack()
-        root.after(1000, messageclear, fail6_2)
+        fail7_2.pack()
+        root.after(2000, messageclear, fail7_2)
     for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
-        
         entry.config(state='disabled')
 
 
@@ -640,34 +639,39 @@ submit5.pack()
 mainmenu9.pack(side='bottom')
 
 #f6 items
-outputframe6=tb.Frame(f6)
-searchbar=tb.Frame(f6)
-f6_title=tb.Label(f6, text='Search Players', font=('Times bold', 12), relief='groove', padding=2)
-s_tag=tb.Entry(searchbar,)
+mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
+
+mainmenu9.pack()
+
+#f7 items
+outputframe7=tb.Frame(f7)
+searchbar=tb.Frame(f7)
+f7_title=tb.Label(f7, text='Search Players', font=('Times bold', 12), relief='groove', padding=2)
+s_tag=tb.Entry(searchbar)
 s_tag.insert(0, 'Enter player tag')
 s_tag.config(foreground='grey')
 s_tag.bind('<FocusIn>', on_entry_click)
 s_tag.bind('<FocusOut>', on_focusout)
 
-ope1=tb.Entry(outputframe6, state='disabled')
-ope2=tb.Entry(outputframe6, state='disabled')
-ope3=tb.Entry(outputframe6, state='disabled')
-ope4=tb.Entry(outputframe6, state='disabled')
-ope5=tb.Entry(outputframe6, state='disabled')
-ope6=tb.Entry(outputframe6, state='disabled')
-ope7=tb.Entry(outputframe6, state='disabled')
-opl1=tb.Label(outputframe6, text='Tag')
-opl2=tb.Label(outputframe6, text='Player ID')
-opl3=tb.Label(outputframe6, text='Role')
-opl4=tb.Label(outputframe6, text='Score')
-opl5=tb.Label(outputframe6, text='Name')
-opl6=tb.Label(outputframe6, text='Region')
-opl7=tb.Label(outputframe6, text='Regional rank')
+ope1=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope2=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope3=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope4=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope5=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope6=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope7=tb.Text(outputframe7, height=1, width=20, state='disabled')
+opl1=tb.Label(outputframe7, text='Tag')
+opl2=tb.Label(outputframe7, text='Player ID')
+opl3=tb.Label(outputframe7, text='Role')
+opl4=tb.Label(outputframe7, text='Score')
+opl5=tb.Label(outputframe7, text='Name')
+opl6=tb.Label(outputframe7, text='Region')
+opl7=tb.Label(outputframe7, text='Regional rank')
 
-fail6_1=tb.Label(f6, text='Player not found')
-fail6_2=tb.Label(f6, text='Invalid tag')
+fail7_1=tb.Label(f7, text='Player not found')
+fail7_2=tb.Label(f7, text='Invalid tag')
 s_button=tb.Button(searchbar, image=isearch, command=search)
-mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
+mainmenu9=tb.Button(f7, text='Main Menu', command=mainmenu)
 
 ope1.grid(row= 0, column= 1)
 ope2.grid(row= 1, column= 1)
@@ -684,16 +688,11 @@ opl5.grid(row= 4, column= 0)
 opl6.grid(row= 5, column= 0)
 opl7.grid(row= 6, column= 0)
 
-f6_title.pack()
+f7_title.pack()
 s_tag.pack(side='left')
 s_button.pack(side='left')
 searchbar.pack()
 mainmenu9.pack(side='bottom')
-
-#f7 items
-mainmenu9=tb.Button(f7, text='Main Menu', command=mainmenu)
-
-mainmenu9.pack()
 
 #f8 items
 mainmenu9=tb.Button(f8, text='Main Menu', command=mainmenu)
