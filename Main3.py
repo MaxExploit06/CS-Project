@@ -1,4 +1,3 @@
-from faulthandler import disable
 import mysql.connector as mc
 from tkinter import *
 import ttkbootstrap as tb
