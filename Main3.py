@@ -768,6 +768,7 @@ swap_val= IntVar()
 themebutton=tb.Checkbutton(M1, bootstyle="light,toolbutton,outline",text="Switch Theme",variable=swap_val,onvalue=1,offvalue=0, command=themeswap)
 
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=('Times bold', 25), relief='groove', padding=5)
+M1_logout=tb.Button(M1, text='LOGOUT', command=logout)
 
 b1.pack(side='left')
 b2.pack(side='left')
@@ -783,6 +784,7 @@ M1_1.pack()
 M1_2.pack()
 M1_3.pack()
 themebutton.pack()
+M1_logout.pack(side='bottom')
 
 #f1 items
 f1_title=tb.Label(f1, text='Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
