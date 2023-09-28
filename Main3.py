@@ -255,8 +255,6 @@ def admin_login_swap():
 def player_login_swap():
     LP.tkraise()
 
-def mainmenu():
-    M1.tkraise()
 def f1_swap():
     f1.tkraise()
 def f2_swap():
@@ -269,19 +267,54 @@ def f5_swap():
     f5.tkraise()
 def f6_swap():
     f6.tkraise()
-    w=f6.winfo_reqwidth()
 def f7_swap():
     f7.tkraise()
 def f8_swap():
     f8.tkraise()
-    w=f8.winfo_reqwidth()
 def f9_swap():
     f9.tkraise()
+
+#main menu definitions
+def fmainmenu1():
+    area.config(state='normal')
+    area.delete("1.0", END)
+    area.config(state='disable')
+    M1.tkraise()
+def fmainmenu2():
+    table2.forget()
+    area2.pack()
+    M1.tkraise()
+def fmainmenu3():
+    scoremessage.set('')
+    M1.tkraise()
+def fmainmenu4():
+    for entry in [pe1,pe2,pe3,pe4,pe5,pe6,pe7]:
+        entry.delete(0, 'end')
+    M1.tkraise()
+def fmainmenu5():
+    for entry in [ume1,ume2,ume3,ume4]:
+        entry.delete(0, 'end')
+    M1.tkraise()
+def fmainmenu6():
+    reset6()
+    M1.tkraise()
+def fmainmenu7():
+    s_tag.delete(0, 'end')
+    s_tag.insert(0, 'Enter player tag')
+    s_tag.config(foreground='grey')
+    outputframe7.forget()
+    M1.tkraise()
+def fmainmenu8():
+    reset8()
+    M1.tkraise()
+def fmainmenu9():
+    tag_entry9.delete(0, 'end')
+    M1.tkraise()
 
 #sql connectivity functions
 um_content=''
 def um(team):
-    global um_content, area
+    global um_content
     area.config(state='normal')
     um_content=''
     if team==1:
@@ -541,6 +574,7 @@ def reset8():
     c_6.config(state='normal', command=lambda: get_ctu(6))
     tag_entry.config(state='normal')
     tag_entry.delete(0, 'end')
+    up_entry.config(state='normal')
     up_entry.delete(0, 'end')
     entryframe8_2.forget()
     entryframe8_1.forget()
@@ -757,7 +791,7 @@ f1_1=tb.Frame(f1)
 team1=tb.Button(f1_1, text='Team 1', command=lambda: um(1))
 team2=tb.Button(f1_1, text='Team 2', command=lambda: um(2))
 area=tb.Text(f1, height= 15, width= 52, relief='sunken', state='disable')
-mainmenu9=tb.Button(f1, text='Main Menu', command=mainmenu)
+mainmenu1=tb.Button(f1, text='Main Menu', command=fmainmenu1)
 
 f1_title.pack()
 f1_title1.pack()
@@ -765,7 +799,7 @@ team1.pack(side='left')
 team2.pack(side='left')
 f1_1.pack()
 area.pack()
-mainmenu9.pack()
+mainmenu1.pack(side='bottom')
 
 #f2 items
 f2_title=tb.Label(f2, text='Display Team', font=('Times bold', 12), relief='groove', padding=2)
@@ -787,7 +821,7 @@ table2=Tableview(
     stripecolor=(colors.light, None),
     height=4,
 )
-mainmenu9=tb.Button(f2, text='Main Menu', command=mainmenu)
+mainmenu2=tb.Button(f2, text='Main Menu', command=fmainmenu2)
 
 f2_title.pack()
 f2_title1.pack()
@@ -795,7 +829,7 @@ dteam1.pack(side='left')
 dteam2.pack(side='left')
 f2_1.pack()
 area2.pack()
-mainmenu9.pack(side='bottom')
+mainmenu2.pack(side='bottom')
 
 #f3 items
 f3_title=tb.Label(f3, text='Display Team Score', font=('Times bold', 12), relief='groove', padding=2)
@@ -803,7 +837,7 @@ f3_title1=tb.Label(f3, text='Select a team to view team score')
 f3_1=tb.Frame(f3)
 steam1=tb.Button(f3_1, text='Team 1', command=lambda: team_score(1))
 steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))
-mainmenu9=tb.Button(f3, text='Main Menu', command=mainmenu)
+mainmenu3=tb.Button(f3, text='Main Menu', command=fmainmenu3)
 scorelabel=tb.Label(f3, textvariable=scoremessage)
 
 f3_title.pack()
@@ -812,7 +846,7 @@ steam1.pack(side='left')
 steam2.pack(side='left')
 f3_1.pack()
 scorelabel.pack()
-mainmenu9.pack(side='bottom')
+mainmenu3.pack(side='bottom')
 
 #f4 items
 entryframe4=tb.Frame(f4)
@@ -835,7 +869,7 @@ pl7=tb.Label(entryframe4, text='Regional rank')
 submit4=tb.Button(f4, text='Submit', command=addplayer)
 success4=tb.Label(f4, text='Added succesfully')
 fail4=tb.Label(f4, text='Unsuccesful')
-mainmenu9=tb.Button(f4, text='Main Menu', command=mainmenu)
+mainmenu4=tb.Button(f4, text='Main Menu', command=fmainmenu4)
 
 
 f4_title.pack()
@@ -858,7 +892,7 @@ pl7.grid(row= 6, column= 0)
 
 entryframe4.pack()
 submit4.pack()
-mainmenu9.pack(side='bottom')
+mainmenu4.pack(side='bottom')
 
 #f5 items
 entryframe5=tb.Frame(f5)
@@ -876,7 +910,7 @@ uml4=tb.Label(entryframe5, text='Price')
 submit5=tb.Button(f5, text='Submit', command=addum)
 success5=tb.Label(f5, text='Added succesfully')
 fail5=tb.Label(f5, text='Unsuccesful')
-mainmenu9=tb.Button(f5, text='Main Menu', command=mainmenu)
+mainmenu5=tb.Button(f5, text='Main Menu', command=fmainmenu5)
 
 
 f5_title.pack()
@@ -893,7 +927,7 @@ uml4.grid(row= 3, column= 0)
 
 entryframe5.pack()
 submit5.pack()
-mainmenu9.pack(side='bottom')
+mainmenu5.pack(side='bottom')
 
 #f6 items
 f6_1=tb.Frame(f6)
@@ -926,7 +960,7 @@ success6=tb.Label(f6, text='Swap succesful!!')
 fail6=tb.Label(f6, text='Swap unsuccesful...')
 fail6_1=tb.Label(f6, text='Fill in both')
 b_reset6=tb.Button(f6, text='Reset selection', command=reset6)
-mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
+mainmenu6=tb.Button(f6, text='Main Menu', command=fmainmenu6)
 
 b6_1.pack(side='left')
 b6_2.pack(side='left')
@@ -949,7 +983,7 @@ submit6_1a.pack()
 
 f6_title.pack()
 f6_1.pack()
-mainmenu9.pack(side='bottom')
+mainmenu6.pack(side='bottom')
 b_reset6.pack(side='bottom')
 
 #f7 items
@@ -980,7 +1014,7 @@ opl7=tb.Label(outputframe7, text='Regional rank')
 fail7_1=tb.Label(f7, text='Player not found')
 fail7_2=tb.Label(f7, text='Invalid tag')
 s_button=tb.Button(searchbar, image=isearch, command=search)
-mainmenu9=tb.Button(f7, text='Main Menu', command=mainmenu)
+mainmenu7=tb.Button(f7, text='Main Menu', command=fmainmenu7)
 
 ope1.grid(row= 0, column= 1)
 ope2.grid(row= 1, column= 1)
@@ -1001,7 +1035,7 @@ f7_title.pack()
 s_tag.pack(side='left')
 s_button.pack(side='left')
 searchbar.pack()
-mainmenu9.pack(side='bottom')
+mainmenu7.pack(side='bottom')
 
 #f8 items
 buttonframe=tb.Frame(f8)
@@ -1028,7 +1062,7 @@ fail8_2=tb.Label(f8, text='No player found')
 fail8_3=tb.Label(f8, text='Error. Try again')
 success8=tb.Label(f8, text='Update successful')
 b_reset8=tb.Button(f8, text='Reset selection', command=reset8)
-mainmenu9=tb.Button(f8, text='Main Menu', command=mainmenu)
+mainmenu8=tb.Button(f8, text='Main Menu', command=fmainmenu8)
 
 c_1.grid(row= 0,column= 0)
 c_2.grid(row= 0,column= 1)
@@ -1046,14 +1080,13 @@ up_submit.pack(side='left')
 f8_title.pack()
 f8_title1.pack()
 buttonframe.pack()
-mainmenu9.pack(side='bottom')
+mainmenu8.pack(side='bottom')
 b_reset8.pack(side='bottom')
 
 #f9 items
 entryframe9=tb.Frame(f9)
 f9_title=tb.Label(f9, text='Remove player', font=('Times bold', 12), relief='groove', padding=2)
 f9_title1=tb.Label(f9, text='Note- Players playing for either teams cannot be removed.')
-mainmenu9=tb.Button(f9, text='Main Menu', command=mainmenu)
 tag_label9=tb.Label(entryframe9, text='Enter tag of player to be removed')
 tag_entry9=tb.Entry(entryframe9)
 fail9_1=tb.Label(f9, text='Invalid tag')
@@ -1061,6 +1094,7 @@ fail9_2=tb.Label(f9, text='Player not found')
 fail9_3=tb.Label(f9, text="Can't execute command because player already exist in a team")
 success9=tb.Label(f9, text='Player removed successfully')
 tag_submit9=tb.Button(entryframe9, image=isend, command=remove)
+mainmenu9=tb.Button(f9, text='Main Menu', command=fmainmenu9)
 
 tag_label9.pack(side='left')
 tag_entry9.pack(side='left')
