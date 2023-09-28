@@ -1037,6 +1037,8 @@ steam1=tb.Button(f3_1, text='Team 1', command=lambda: team_score(1))
 steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))
 mainmenu3=tb.Button(f3, text='Main Menu', command=fmainmenu3)
 scorelabel=tb.Label(f3, textvariable=scoremessage)
+hmm=tb.Meter(f3, bootstyle='danger', subtext='teamscore', interactive=False, textright='/400',
+              metertype='semi', amounttotal=400, amountused=300)
 
 f3_title.pack()
 f3_title1.pack()
@@ -1045,6 +1047,7 @@ steam2.pack(side='left')
 f3_1.pack()
 scorelabel.pack()
 mainmenu3.pack(side='bottom')
+hmm.pack()
 
 #f4 items
 entryframe4=tb.Frame(f4)
