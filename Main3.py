@@ -13,7 +13,7 @@ import pygame
 #check
 
 #MySQL connection
-mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 
@@ -195,8 +195,8 @@ def themeswap():
         mainmenu9.config(style="danger.TButton")
         dteam1.config(style="danger.TButton")
         dteam2.config(style="danger.TButton")
-        steam1.config(style="danger.TButton")
-        steam2.config(style="danger.TButton")
+        '''steam1.config(style="danger.TButton")
+        steam2.config(style="danger.TButton")'''
         tag_submit.config(style="danger.TButton")
         up_submit.config(style="danger.TButton")
         s_button.config(style="danger.TButton")
@@ -254,8 +254,8 @@ def themeswap():
         mainmenu9.config(style="primary.TButton")
         dteam1.config(style="primary.TButton")
         dteam2.config(style="primary.TButton")
-        steam1.config(style="primary.TButton")
-        steam2.config(style="primary.TButton")
+        '''steam1.config(style="primary.TButton")
+        steam2.config(style="primary.TButton")'''
         tag_submit.config(style="primary.TButton")
         up_submit.config(style="primary.TButton")
         s_button.config(style="primary.TButton")
@@ -424,8 +424,8 @@ def f2_swap():
     click()
     f2.tkraise()
 def f3_swap():
-    click()
     f3.tkraise()
+    team_score_update()
 def f4_swap():
     click()
     f4.tkraise()
@@ -459,7 +459,6 @@ def fmainmenu2():
     M1.tkraise()
 def fmainmenu3():
     click()
-    scoremessage.set('')
     M1.tkraise()
 def fmainmenu4():
     click()
@@ -525,21 +524,39 @@ def dt(team):
         table2.insert_row('end', row)
     table2.load_table_data()
 
-score=''
-scoremessage=StringVar()
-scoremessage.set('')
-def team_score(team):
+teamscore1=0
+teamscore2=0
+def team_score_update():
     click()
-    global score, scoremessage
-    if team==1:
-        team='team1'
-    elif team==2:
-        team='team2'
-    q_2=f'select sum(Player_Score) from {team}'
-    cur.execute(q_2)
+    global teamscore1, teamscore2
+    meter1.configure(amountused = 0)
+    meter2.configure(amountused = 0)
+    q_2_1=f'select sum(Player_Score) from team1'
+    q_2_2=f'select sum(Player_Score) from team2'
+    cur.execute(q_2_1)
     for i in cur:
-        score = i[0]
-    scoremessage.set(f'The team score is {score}')
+        teamscore1 = i[0]
+    cur.execute(q_2_2)
+    for i in cur:
+        teamscore2 = i[0]
+    meter1_gif(0)
+    meter2_gif(0)
+
+def meter1_gif(x):
+        global teamscore1
+        meter1.configure(amountused = x)
+        if x==teamscore1:
+            pass
+        else:
+            root.after(100, meter1_gif, x+1)
+def meter2_gif(x):
+        global teamscore2
+        meter2.configure(amountused = x)
+        if x==teamscore2:
+            pass
+        else:
+            root.after(100, meter2_gif, x+1)
+
 
 def addplayer():
     click()
@@ -1033,21 +1050,28 @@ mainmenu2.pack(side='bottom')
 f3_title=tb.Label(f3, text='Display Team Score', font=('Times bold', 12), relief='groove', padding=2)
 f3_title1=tb.Label(f3, text='Select a team to view team score')
 f3_1=tb.Frame(f3)
-steam1=tb.Button(f3_1, text='Team 1', command=lambda: team_score(1))
-steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))
+'''steam1=tb.Button(f3_1, text='Team 1', command=lambda: team_score(1))
+steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))'''
 mainmenu3=tb.Button(f3, text='Main Menu', command=fmainmenu3)
-scorelabel=tb.Label(f3, textvariable=scoremessage)
-hmm=tb.Meter(f3, bootstyle='danger', subtext='teamscore', interactive=False, textright='/400',
-              metertype='semi', amounttotal=400, amountused=300)
+scorelabel=tb.Label(f3)
+meters=tb.Frame(f3)
+meter1=tb.Meter(meters, bootstyle='danger', subtext='TEAM 1', interactive=False, textright='/400',
+              metertype='semi', amounttotal=400, amountused=0)
+meter2=tb.Meter(meters, bootstyle='danger', subtext='TEAM 2', interactive=False, textright='/400',
+              metertype='semi', amounttotal=400, amountused=0)
+refresh=tb.Button(f3, text= 'Refresh', command= team_score_update, style="primary.Outline.TButton")
 
 f3_title.pack()
 f3_title1.pack()
-steam1.pack(side='left')
-steam2.pack(side='left')
+'''steam1.pack(side='left')
+steam2.pack(side='left')'''
 f3_1.pack()
 scorelabel.pack()
+meter1.pack(side='left')
+meter2.pack(side='left')
+meters.pack()
 mainmenu3.pack(side='bottom')
-hmm.pack()
+refresh.pack(side='bottom')
 
 #f4 items
 entryframe4=tb.Frame(f4)
