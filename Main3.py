@@ -545,17 +545,17 @@ def team_score_update():
 def meter1_gif(x):
         global teamscore1
         meter1.configure(amountused = x)
-        if x==teamscore1:
-            pass
+        if (x+25) >= teamscore1:
+            meter1.configure(amountused = teamscore1)
         else:
-            root.after(100, meter1_gif, x+1)
+            root.after(30, meter1_gif, x+25)
 def meter2_gif(x):
         global teamscore2
         meter2.configure(amountused = x)
-        if x==teamscore2:
-            pass
+        if (x+25) >= teamscore2:
+            meter2.configure(amountused = teamscore2)
         else:
-            root.after(100, meter2_gif, x+1)
+            root.after(30, meter2_gif, x+25)
 
 
 def addplayer():
