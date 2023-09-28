@@ -43,6 +43,10 @@ search1=Image.open('search.png')
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
 
+send1=Image.open('send.png')
+resized_send = send1.resize((16, 16))
+isend=ImageTk.PhotoImage(resized_send)
+
 def update_gif(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
     if frame_index==56:
@@ -364,7 +368,7 @@ def search():
     for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
         entry.config(state='disabled')
 
-#temp
+#(edit team definitions)
 swapchoice2=0
 def nope():
     pass
@@ -440,7 +444,6 @@ def ad2():
     b6_2_2.config(state='disabled')
     b6_2_1.config(command=nope)
     swapchoice2=2
-
 def reset6():
     e6_1.delete(0, 'end')
     e6_2.delete(0, 'end')
@@ -454,6 +457,73 @@ def reset6():
     f6_1_1.forget()
     f6_1_2_1.forget()
     f6_1_2.forget()
+#(Edit team definitions end)
+
+#Update details definition
+col_choice=''
+col_available=['Tag', 'Player_ID', 'Player_Name', 'Player_Score', 'Region', 'Regional_Rank']
+tag_stored=''
+def get_ctu(clicked):
+    global col_choice
+    index=clicked - 1
+    buttonlist[index].config(state='disabled')
+    for button in buttonlist:
+        button.config(command=nope)
+    col_choice=clicked
+    entryframe8_1.pack()
+    pass
+def submit8_1():
+    global tag_stored
+    tag_stored=tag_entry.get()
+    try:
+        x=int(tag_stored)
+        q_temp=f"select * from information where tag={tag_stored}"
+        cur.execute(q_temp)
+        record_temp=cur.fetchall()
+        if record_temp==[]:
+            fail8_2.pack()
+            root.after(1000, messageclear, fail8_2)
+        else:
+            entryframe8_2.pack()
+            tag_entry.config(state='disabled')
+    except:
+        fail8_1.pack()
+        root.after(1000, messageclear, fail8_1)
+def submit8_2():
+    global col_choice, col_available, tag_stored
+    col=col_available[col_choice - 1]
+    row=tag_stored
+    up=up_entry.get()
+    try:
+        if col == "Player_Score" or col == "Regional_Rank":
+            q_8 = f"Update information set {col} = {up} where tag = {row}"
+            cur.execute(q_8)
+        elif col == "Player_ID" or col == "Player_Name" or col == "Region":
+            q_8 = f"Update information set {col} = '{up}' where tag = {row}"
+            cur.execute(q_8)
+        elif col == "Tag":
+            q_8 = f"Update information set {col} = {up} where tag = {row}"
+            q_8_1 = f"Update information set password = {up} where tag = {row}"
+            cur.execute(q_8)
+            cur.execute(q_8_1)
+        up_entry.config(state='disabled')
+        success8.pack()
+        root.after(1000, messageclear, success8)
+    except:
+        fail8_3.pack()
+        root.after(1000, messageclear, fail8_3)
+def reset8():
+    c_1.config(state='normal', command=lambda: get_ctu(1))
+    c_2.config(state='normal', command=lambda: get_ctu(2))
+    c_3.config(state='normal', command=lambda: get_ctu(3))
+    c_4.config(state='normal', command=lambda: get_ctu(4))
+    c_5.config(state='normal', command=lambda: get_ctu(5))
+    c_6.config(state='normal', command=lambda: get_ctu(6))
+    tag_entry.config(state='normal')
+    tag_entry.delete(0, 'end')
+    up_entry.delete(0, 'end')
+    entryframe8_2.forget()
+    entryframe8_1.forget()
 
 
 #Frames
@@ -838,9 +908,50 @@ searchbar.pack()
 mainmenu9.pack(side='bottom')
 
 #f8 items
+buttonframe=tb.Frame(f8)
+entryframe8_1=tb.Frame(f8)
+entryframe8_2=tb.Frame(f8)
+f8_title=tb.Label(f8, text='Update player details', font=('Times bold', 12), relief='groove', padding=2)
+f8_title1=tb.Label(f8, text='select coloumn to update')
+
+c_1=tb.Button(buttonframe, text='Tag', command=lambda: get_ctu(1))
+c_2=tb.Button(buttonframe, text='Player ID', command=lambda: get_ctu(2))
+c_3=tb.Button(buttonframe, text='Player Name', command=lambda: get_ctu(3))
+c_4=tb.Button(buttonframe, text='Score', command=lambda: get_ctu(4))
+c_5=tb.Button(buttonframe, text='Region', command=lambda: get_ctu(5))
+c_6=tb.Button(buttonframe, text='Regional Rank', command=lambda: get_ctu(6))
+buttonlist=[c_1,c_2,c_3,c_4,c_5,c_6]
+tag_label=tb.Label(entryframe8_1, text='Enter tag of player')
+tag_entry=tb.Entry(entryframe8_1)
+tag_submit=tb.Button(entryframe8_1, image=isend, command=submit8_1)
+up_label=tb.Label(entryframe8_2, text='Enter new detail')
+up_entry=tb.Entry(entryframe8_2)
+up_submit=tb.Button(entryframe8_2, image=isend, command=submit8_2)
+fail8_1=tb.Label(f8, text='Invalid tag')
+fail8_2=tb.Label(f8, text='No player found')
+fail8_3=tb.Label(f8, text='Error. Try again')
+success8=tb.Label(f8, text='Update successful')
+b_reset8=tb.Button(f8, text='Reset selection', command=reset8)
 mainmenu9=tb.Button(f8, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+c_1.grid(row= 0,column= 0)
+c_2.grid(row= 0,column= 1)
+c_3.grid(row= 0,column= 2)
+c_4.grid(row= 1,column= 0)
+c_5.grid(row= 1,column= 1)
+c_6.grid(row= 1,column= 2)
+
+tag_label.pack(side='left')
+tag_entry.pack(side='left')
+tag_submit.pack(side='left')
+up_label.pack(side='left')
+up_entry.pack(side='left')
+up_submit.pack(side='left')
+f8_title.pack()
+f8_title1.pack()
+buttonframe.pack()
+mainmenu9.pack(side='bottom')
+b_reset8.pack(side='bottom')
 
 #f9 items
 mainmenu9=tb.Button(f9, text='Main Menu', command=mainmenu)

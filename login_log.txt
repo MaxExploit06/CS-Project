@@ -154,3 +154,17 @@
 2023-09-28 08:11:45,348 - Login attempt: User 'TheFallen' - success
 2023-09-28 08:22:31,466 - Login attempt: User 'TheFallen' - success
 2023-09-28 08:24:46,026 - Login attempt: User 'TheFallen' - success
+2023-09-28 08:30:16,764 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:10:20,141 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:10:49,824 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:17:26,005 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:34:45,749 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:46:02,645 - Login attempt: User 'TheFallen' - success
+2023-09-28 09:54:14,178 - Login attempt: User 'TheFallen' - success
+2023-09-28 10:12:23,545 - Login attempt: User 'MaxExploit' - success
+2023-09-28 10:14:27,511 - Login attempt: User 'MaxExploit' - success
+2023-09-28 10:29:22,444 - Login attempt: User 'TheFallen' - failed
+2023-09-28 10:29:27,941 - Login attempt: User 'TheFallen' - success
+2023-09-28 10:32:10,186 - Login attempt: User 'MaxExploit' - success
+2023-09-28 10:33:21,601 - Login attempt: User 'MaxExploit' - success
+2023-09-28 10:34:39,115 - Login attempt: User 'MaxExploit' - success
