@@ -547,16 +547,19 @@ def meter1_gif(x):
         meter1.configure(amountused = x)
         if x==teamscore1:
             pass
+        elif x < teamscore1-6:
+            root.after(30, meter1_gif, x+5)
         else:
-            root.after(100, meter1_gif, x+1)
+            root.after(30, meter1_gif, x+1)
 def meter2_gif(x):
         global teamscore2
         meter2.configure(amountused = x)
         if x==teamscore2:
             pass
+        elif x < teamscore2-6:
+            root.after(30, meter2_gif, x+5)
         else:
-            root.after(100, meter2_gif, x+1)
-
+            root.after(30, meter2_gif, x+1)
 
 def addplayer():
     click()
