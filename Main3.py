@@ -139,11 +139,13 @@ def themeswap():
     global t, gif_path
     if t==0:
         tb.Style(theme="cosmo")
-        themebutton.config(bootstyle='dark, toolbutton, outline')
+        themebutton1.config(bootstyle='dark, outline')
+        themebutton2.config(bootstyle='dark, outline')
         t=1
     elif t==1:
         tb.Style(theme="cyborg")
-        themebutton.config(bootstyle='light, toolbutton, outline')
+        themebutton1.config(bootstyle='light, outline')
+        themebutton2.config(bootstyle='light, outline')
         t=0
 
 def logout():
@@ -260,9 +262,9 @@ def display():
 def player_login():
     global player_details, t
     username=Pus2.get()
-    Aus2.delete(0, END)
+    Pus2.delete(0, END)
     password=Ppw2.get()
-    Apw2.delete(0, END)
+    Ppw2.delete(0, END)
     if username and password:
         try:
             x=int(password)
@@ -762,6 +764,7 @@ MP_opl6=tb.Label(outputframe, text='Region')
 MP_opl7=tb.Label(outputframe, text='Regional rank')
 
 MP_logout=tb.Button(MP, text='LOGOUT', command=logout)
+themebutton2=tb.Button(MP, bootstyle="light, outline",text="Switch Theme", command=themeswap)
 
 MP_ope1.grid(row= 0, column= 1)
 MP_ope2.grid(row= 1, column= 1)
@@ -781,6 +784,7 @@ MP_opl7.grid(row= 6, column= 0)
 MP_title.pack()
 outputframe.pack()
 MP_logout.pack(side='bottom')
+themebutton2.pack(side='bottom')
 
 
 #M1 items
@@ -797,8 +801,7 @@ b6=Button(M1_2, text='Edit team', padx=49.5, pady=5, command=f6_swap)
 b7=Button(M1_3, text='Search player', padx=39, pady=5, command=f7_swap)
 b8=Button(M1_3, text='Update player details', padx=20, pady=5, command=f8_swap)
 b9=Button(M1_3, text='Remove player', padx=36, pady=5, command=f9_swap)
-swap_val= IntVar()
-themebutton=tb.Checkbutton(M1, bootstyle="light,toolbutton,outline",text="Switch Theme",variable=swap_val,onvalue=1,offvalue=0, command=themeswap)
+themebutton1=tb.Button(M1, bootstyle="light, outline",text="Switch Theme", command=themeswap)
 
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=('Times bold', 25), relief='groove', padding=5)
 M1_logout=tb.Button(M1, text='LOGOUT', command=logout)
@@ -816,8 +819,8 @@ M1_title.pack()
 M1_1.pack()
 M1_2.pack()
 M1_3.pack()
-themebutton.pack()
 M1_logout.pack(side='bottom')
+themebutton1.pack(side='bottom')
 
 #f1 items
 f1_title=tb.Label(f1, text='Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
