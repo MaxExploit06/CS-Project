@@ -6,6 +6,9 @@ from ttkbootstrap.constants import *
 from PIL import Image, ImageTk, ImageSequence
 import hashlib
 import logging
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
 
 #check
 
@@ -22,6 +25,13 @@ root.iconbitmap('EMS.ico')
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
+
+#music
+pygame.mixer.init()
+
+def click():
+    pygame.mixer.music.load('click.mp3')
+    pygame.mixer.music.play(loops=0)
 
 #Images
 admin1=Image.open('admin.png')
@@ -137,19 +147,25 @@ t1=1 ; t2=1
 #other definitions
 def themeswap():
     global t, gif_path
+    pygame.mixer.music.load('toggle.mp3')
+    pygame.mixer.music.play(loops=0)
     if t==0:
         tb.Style(theme="cosmo")
-        themebutton.config(bootstyle='dark, toolbutton, outline')
+        themebutton1.config(bootstyle='dark, outline')
+        themebutton2.config(bootstyle='dark, outline')
         t=1
     elif t==1:
         tb.Style(theme="cyborg")
-        themebutton.config(bootstyle='light, toolbutton, outline')
+        themebutton1.config(bootstyle='light, outline')
+        themebutton2.config(bootstyle='light, outline')
         t=0
 
 def logout():
+    click()
     L1.tkraise()
 
 def a_eye_toggle():
+    click()
     global Apw2, Aeye, t1
     if t1==1:
         Apw2.config(show= '')
@@ -161,6 +177,7 @@ def a_eye_toggle():
         t1=1
 
 def p_eye_toggle():
+    click()
     global Ppw2, Peye, t2
     if t2==1:
         Ppw2.config(show= '')
@@ -211,6 +228,7 @@ def login(username, password):
     return False
 
 def admin_login():
+    click()
     global t
     username=Aus2.get()
     Aus2.delete(0, END)
@@ -258,11 +276,12 @@ def display():
         entry.config(state='disabled')
     outputframe.pack()
 def player_login():
+    click()
     global player_details, t
     username=Pus2.get()
-    Aus2.delete(0, END)
+    Pus2.delete(0, END)
     password=Ppw2.get()
-    Apw2.delete(0, END)
+    Ppw2.delete(0, END)
     if username and password:
         try:
             x=int(password)
@@ -284,47 +303,63 @@ def player_login():
 
 #page swap definitions
 def admin_login_swap():
+    click()
     LA.tkraise()
 def player_login_swap():
+    click()
     LP.tkraise()
 
 def f1_swap():
+    click()
     f1.tkraise()
 def f2_swap():
+    click()
     f2.tkraise()
 def f3_swap():
+    click()
     f3.tkraise()
 def f4_swap():
+    click()
     f4.tkraise()
 def f5_swap():
+    click()
     f5.tkraise()
 def f6_swap():
+    click()
     f6.tkraise()
 def f7_swap():
+    click()
     f7.tkraise()
 def f8_swap():
+    click()
     f8.tkraise()
 def f9_swap():
+    click()
     f9.tkraise()
 
 #main menu definitions
 def fmainmenu1():
+    click()
     area.config(state='normal')
     area.delete("1.0", END)
     area.config(state='disable')
     M1.tkraise()
 def fmainmenu2():
+    click()
     table2.forget()
     area2.pack()
     M1.tkraise()
 def fmainmenu3():
+    click()
     scoremessage.set('')
     M1.tkraise()
 def fmainmenu4():
+    click()
     for entry in [pe1,pe2,pe3,pe4,pe5,pe6,pe7]:
         entry.delete(0, 'end')
     M1.tkraise()
 def fmainmenu5():
+    click()
     for entry in [ume1,ume2,ume3,ume4]:
         entry.delete(0, 'end')
     M1.tkraise()
@@ -332,6 +367,7 @@ def fmainmenu6():
     reset6()
     M1.tkraise()
 def fmainmenu7():
+    click()
     s_tag.delete(0, 'end')
     s_tag.insert(0, 'Enter player tag')
     s_tag.config(foreground='grey')
@@ -341,12 +377,14 @@ def fmainmenu8():
     reset8()
     M1.tkraise()
 def fmainmenu9():
+    click()
     tag_entry9.delete(0, 'end')
     M1.tkraise()
 
 #sql connectivity functions
 um_content=''
 def um(team):
+    click()
     global um_content
     area.config(state='normal')
     um_content=''
@@ -364,6 +402,7 @@ def um(team):
 
 rowdata=[]
 def dt(team):
+    click()
     table2.delete_rows()
     global rowdata
     area2.forget()
@@ -382,6 +421,7 @@ score=''
 scoremessage=StringVar()
 scoremessage.set('')
 def team_score(team):
+    click()
     global score, scoremessage
     if team==1:
         team='team1'
@@ -394,6 +434,7 @@ def team_score(team):
     scoremessage.set(f'The team score is {score}')
 
 def addplayer():
+    click()
     tag=pe1.get()
     id=pe2.get()
     role=pe3.get()
@@ -412,6 +453,7 @@ def addplayer():
         root.after(2000, messageclear, fail4)
 
 def addum():
+    click()
     name=ume1.get()
     date=ume2.get()
     team=ume3.get()
@@ -426,6 +468,7 @@ def addum():
         root.after(2000, messageclear, fail5)
 
 def search():
+    click()
     outputframe7.forget()
     for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
         entry.config(state='normal')
@@ -463,6 +506,7 @@ def aa():
     b6_1.config(state='disabled')
     b6_2.config(command=nope)
 def ab1():
+    click()
     xTag=e6_1.get()
     yTag=e6_2.get()
     if xTag and yTag:
@@ -490,6 +534,7 @@ def ab1():
         fail6_1.pack()
         root.after(2000, messageclear, fail6_1)
 def ab2():
+    click()
     if swapchoice2 == 1:
         team='team1'
     elif swapchoice2 == 2:
@@ -515,22 +560,26 @@ def ab2():
         fail6_1.pack()
         root.after(2000, messageclear, fail6_1)    
 def ac():
+    click()
     f6_1_2.pack()
     b6_2.config(state='disabled')
     b6_1.config(command=nope)
 def ad1():
+    click()
     global swapchoice2
     f6_1_2_1.pack()
     b6_2_1.config(state='disabled')
     b6_2_2.config(command=nope)
     swapchoice2=1
 def ad2():
+    click()
     global swapchoice2
     f6_1_2_1.pack()
     b6_2_2.config(state='disabled')
     b6_2_1.config(command=nope)
     swapchoice2=2
 def reset6():
+    click()
     e6_1.delete(0, 'end')
     e6_2.delete(0, 'end')
     e6_1a.delete(0, 'end')
@@ -550,6 +599,7 @@ col_choice=''
 col_available=['Tag', 'Player_ID', 'Player_Name', 'Player_Score', 'Region', 'Regional_Rank']
 tag_stored=''
 def get_ctu(clicked):
+    click()
     global col_choice
     index=clicked - 1
     buttonlist[index].config(state='disabled')
@@ -559,6 +609,7 @@ def get_ctu(clicked):
     entryframe8_1.pack()
     pass
 def submit8_1():
+    click()
     global tag_stored
     tag_stored=tag_entry.get()
     try:
@@ -576,6 +627,7 @@ def submit8_1():
         fail8_1.pack()
         root.after(1000, messageclear, fail8_1)
 def submit8_2():
+    click()
     global col_choice, col_available, tag_stored
     col=col_available[col_choice - 1]
     row=tag_stored
@@ -599,6 +651,7 @@ def submit8_2():
         fail8_3.pack()
         root.after(1000, messageclear, fail8_3)
 def reset8():
+    click()
     c_1.config(state='normal', command=lambda: get_ctu(1))
     c_2.config(state='normal', command=lambda: get_ctu(2))
     c_3.config(state='normal', command=lambda: get_ctu(3))
@@ -614,6 +667,7 @@ def reset8():
 #(Update details definition end)
 
 def remove():
+    click()
     rem=tag_entry9.get()
     try:
         x=int(rem)
@@ -762,6 +816,7 @@ MP_opl6=tb.Label(outputframe, text='Region')
 MP_opl7=tb.Label(outputframe, text='Regional rank')
 
 MP_logout=tb.Button(MP, text='LOGOUT', command=logout)
+themebutton2=tb.Button(MP, bootstyle="light, outline",text="Switch Theme", command=themeswap)
 
 MP_ope1.grid(row= 0, column= 1)
 MP_ope2.grid(row= 1, column= 1)
@@ -781,6 +836,7 @@ MP_opl7.grid(row= 6, column= 0)
 MP_title.pack()
 outputframe.pack()
 MP_logout.pack(side='bottom')
+themebutton2.pack(side='bottom')
 
 
 #M1 items
@@ -797,8 +853,7 @@ b6=Button(M1_2, text='Edit team', padx=49.5, pady=5, command=f6_swap)
 b7=Button(M1_3, text='Search player', padx=39, pady=5, command=f7_swap)
 b8=Button(M1_3, text='Update player details', padx=20, pady=5, command=f8_swap)
 b9=Button(M1_3, text='Remove player', padx=36, pady=5, command=f9_swap)
-swap_val= IntVar()
-themebutton=tb.Checkbutton(M1, bootstyle="light,toolbutton,outline",text="Switch Theme",variable=swap_val,onvalue=1,offvalue=0, command=themeswap)
+themebutton1=tb.Button(M1, bootstyle="light, outline",text="Switch Theme", command=themeswap)
 
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=('Times bold', 25), relief='groove', padding=5)
 M1_logout=tb.Button(M1, text='LOGOUT', command=logout)
@@ -816,8 +871,8 @@ M1_title.pack()
 M1_1.pack()
 M1_2.pack()
 M1_3.pack()
-themebutton.pack()
 M1_logout.pack(side='bottom')
+themebutton1.pack(side='bottom')
 
 #f1 items
 f1_title=tb.Label(f1, text='Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
@@ -1146,5 +1201,5 @@ frames=[L1,LA,LP,LA1,LP1,MP,M1,f1,f2,f3,f4,f5,f6,f7,f8,f9]
 for frame in frames:
     frame.grid(row=0, column=0, sticky="nsew")
 
-logout()
+L1.tkraise()
 root.mainloop()
