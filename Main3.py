@@ -13,7 +13,7 @@ import pygame
 #check
 
 #MySQL connection
-mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 
@@ -952,15 +952,15 @@ M1_1=tb.Frame(M1)
 M1_2=tb.Frame(M1)
 M1_3=tb.Frame(M1)
 
-b1=tb.Button(M1_1, text='Display upcoming matches', command=f1_swap)
-b2=tb.Button(M1_1, text='Display team', command=f2_swap)
-b3=tb.Button(M1_1, text='Display team score', command=f3_swap)
-b4=tb.Button(M1_2, text='Add player', command=f4_swap)
-b5=tb.Button(M1_2, text='Add upcoming match', command=f5_swap)
-b6=tb.Button(M1_2, text='Edit team', command=f6_swap)
-b7=tb.Button(M1_3, text='Search player', command=f7_swap)
-b8=tb.Button(M1_3, text='Update player details', command=f8_swap)
-b9=tb.Button(M1_3, text='Remove player', command=f9_swap)
+b1=tb.Button(M1_1, text='Display upcoming matches', command=f1_swap,style="primary.Outline.TButton")
+b2=tb.Button(M1_1, text='Display team', command=f2_swap,style="primary.Outline.TButton")
+b3=tb.Button(M1_1, text='Display team score', command=f3_swap,style="primary.Outline.TButton")
+b4=tb.Button(M1_2, text='Add player', command=f4_swap,style="primary.Outline.TButton")
+b5=tb.Button(M1_2, text='Add upcoming match', command=f5_swap,style="primary.Outline.TButton")
+b6=tb.Button(M1_2, text='Edit team', command=f6_swap,style="primary.Outline.TButton")
+b7=tb.Button(M1_3, text='Search player', command=f7_swap,style="primary.Outline.TButton")
+b8=tb.Button(M1_3, text='Update player details', command=f8_swap,style="primary.Outline.TButton")
+b9=tb.Button(M1_3, text='Remove player', command=f9_swap,style="primary.Outline.TButton")
 themebutton1=tb.Button(M1, bootstyle="light, outline",text="Switch Theme", command=themeswap)
 
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=('Times bold', 25), relief='groove', padding=5)
