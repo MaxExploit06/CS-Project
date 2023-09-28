@@ -61,56 +61,82 @@ def update_gif2(canvas, img, frame_index):
     else:
         root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
 
-def gif():
+
+def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
     gif_path = "loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-
     # Create a Canvas widget to display the GIF background
     canvas = tb.Canvas(LA1, width=800, height=600)
     LA1.grid_rowconfigure(0, weight=1)
     LA1.grid_columnconfigure(0, weight=1)
     canvas.grid(row=0,column=0, sticky="nsew")
-
     # Create a background image on the Canvas
     bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-
     # Start the animation loop
     update_gif(canvas, frames, 0)
-    
-    # Add other widgets and functionality here
 
-def gif2():
+def GIF1_light():
+    LA1.tkraise()
+    global bg_img
+    # Load the animated GIF image
+    gif_path = "loading2.gif"
+    gif = Image.open(gif_path)
+    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
+    # Create a Canvas widget to display the GIF background
+    canvas = tb.Canvas(LA1, width=800, height=600)
+    LA1.grid_rowconfigure(0, weight=1)
+    LA1.grid_columnconfigure(0, weight=1)
+    canvas.grid(row=0,column=0, sticky="nsew")
+    # Create a background image on the Canvas
+    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
+    # Start the animation loop
+    update_gif(canvas, frames, 0)
+
+def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
     gif_path = "loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-
     # Create a Canvas widget to display the GIF background
     canvas = tb.Canvas(LP1, width=800, height=600)
     LP1.grid_rowconfigure(0, weight=1)
     LP1.grid_columnconfigure(0, weight=1)
     canvas.grid(row=0,column=0, sticky="nsew")
-
     # Create a background image on the Canvas
     bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-
     # Start the animation loop
     update_gif2(canvas, frames, 0)
-    
-    # Add other widgets and functionality here
+
+def GIF2_light():
+    LP1.tkraise()
+    global bg_img
+    # Load the animated GIF image
+    gif_path = "loading2.gif"
+    gif = Image.open(gif_path)
+    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
+    # Create a Canvas widget to display the GIF background
+    canvas = tb.Canvas(LP1, width=800, height=600)
+    LP1.grid_rowconfigure(0, weight=1)
+    LP1.grid_columnconfigure(0, weight=1)
+    canvas.grid(row=0,column=0, sticky="nsew")
+    # Create a background image on the Canvas
+    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
+    # Start the animation loop
+    update_gif2(canvas, frames, 0)
+
     
 
 t1=1 ; t2=1
 
 #other definitions
 def themeswap():
-    global t
+    global t, gif_path
     if t==0:
         tb.Style(theme="cosmo")
         themebutton.config(bootstyle='dark, toolbutton, outline')
@@ -185,7 +211,7 @@ def login(username, password):
     return False
 
 def admin_login():
-    global Aus2, Apw2
+    global t
     username=Aus2.get()
     Aus2.delete(0, END)
     password=Apw2.get()
@@ -193,7 +219,10 @@ def admin_login():
     if username and password:
         if login(username, password):
             LA1.tkraise()
-            gif()
+            if t==0:
+                GIF1_dark()
+            elif t==1:
+                GIF1_light()
         else:
             LA_title1.config(text="Login failed")
     else:
@@ -229,23 +258,27 @@ def display():
         entry.config(state='disabled')
     outputframe.pack()
 def player_login():
-    global player_details
+    global player_details, t
     username=Pus2.get()
     Aus2.delete(0, END)
     password=Ppw2.get()
     Apw2.delete(0, END)
-    try:
-        x=int(password)
-        if username and password:
-           if plogin(username, password):
-            LP1.tkraise()
-            gif2()
-           else:
-            LP_title1.config(text="Login failed")
-        else:
-            LP_title1.config(text="Please enter both username and password")
-    except:
-        LP_title1.config(text="invalid password")
+    if username and password:
+        try:
+            x=int(password)
+            if plogin(username, password):
+                LP1.tkraise()
+                if t==0:
+                    GIF2_dark()
+                elif t==1:
+                    GIF2_light()
+            else:
+                LP_title1.config(text="Login failed")
+        except:
+            LP_title1.config(text="invalid password")
+    else:
+        LP_title1.config(text="Please enter both username and password")
+    
     
 
 
