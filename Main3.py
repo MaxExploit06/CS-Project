@@ -365,14 +365,95 @@ def search():
         entry.config(state='disabled')
 
 #temp
+swapchoice2=0
+def nope():
+    pass
 def aa():
     f6_1_1_1.pack()
-def ab():
-    success6.pack()
+    b6_1.config(state='disabled')
+    b6_2.config(command=nope)
+def ab1():
+    xTag=e6_1.get()
+    yTag=e6_2.get()
+    if xTag and yTag:
+        try:
+            cur.execute(f'select * from team1 where Tag = {xTag}')
+            for i in cur:
+                xID= i[1]
+                xRole= i[2]
+                xScore= i[3]
+            cur.execute(f'select * from team2 where Tag = {yTag}')
+            for j in cur:
+                yID= j[1]
+                yRole= j[2]
+                yScore= j[3]
+            q1 = f"Update team1 set Tag={yTag},Player_ID='{yID}',Role='{yRole}',Player_Score={yScore} where Tag = {xTag}"
+            q2 = f"Update team2 set Tag={xTag},Player_ID='{xID}',Role='{xRole}',Player_Score={xScore} where Tag = {yTag}"
+            cur.execute(q1)
+            cur.execute(q2)
+            success6.pack()
+            root.after(2000, messageclear, success6)
+        except:
+            fail6.pack()
+            root.after(2000, messageclear, fail6)
+    else:
+        fail6_1.pack()
+        root.after(2000, messageclear, fail6_1)
+def ab2():
+    if swapchoice2 == 1:
+        team='team1'
+    elif swapchoice2 == 2:
+        team='team2'
+    xTag=e6_2a.get()
+    zTag=e6_1a.get()
+    if xTag and zTag:
+        try:
+            cur.execute(f"select * from information where Tag = {zTag}")
+            for i in cur:
+                zID= i[1]
+                zRole= i[2]
+                zScore= i[3]
+
+            q1 = f"Update {team} set Tag={zTag},Player_ID='{zID}',Role='{zRole}',Player_Score={zScore} where Tag = {xTag}"
+            cur.execute(q1)
+            success6.pack()
+            root.after(2000, messageclear, success6)
+        except:
+            fail6.pack()
+            root.after(2000, messageclear, fail6)   
+    else:
+        fail6_1.pack()
+        root.after(2000, messageclear, fail6_1)    
 def ac():
     f6_1_2.pack()
-def ad():
+    b6_2.config(state='disabled')
+    b6_1.config(command=nope)
+def ad1():
+    global swapchoice2
     f6_1_2_1.pack()
+    b6_2_1.config(state='disabled')
+    b6_2_2.config(command=nope)
+    swapchoice2=1
+def ad2():
+    global swapchoice2
+    f6_1_2_1.pack()
+    b6_2_2.config(state='disabled')
+    b6_2_1.config(command=nope)
+    swapchoice2=2
+
+def reset6():
+    e6_1.delete(0, 'end')
+    e6_2.delete(0, 'end')
+    e6_1a.delete(0, 'end')
+    e6_2a.delete(0, 'end')
+    b6_1.config(state='normal', command=aa)
+    b6_2.config(state='normal', command=ac)
+    b6_2_1.config(state='normal', command=ad1)
+    b6_2_2.config(state='normal', command=ad2)
+    f6_1_1_1.forget()
+    f6_1_1.forget()
+    f6_1_2_1.forget()
+    f6_1_2.forget()
 
 
 #Frames
@@ -665,21 +746,24 @@ l6_1=tb.Label(f6_1_1_1a,text="Enter Tag of player to swap from Team 1")
 l6_2=tb.Label(f6_1_1_1b,text="Enter Tag of player to swap from Team 2")
 e6_1=tb.Entry(f6_1_1_1a)
 e6_2=tb.Entry(f6_1_1_1b)
-submit6_1=tb.Button(f6_1_1_1, text='SUBMIT', command=ab)
-b6_2_1=tb.Button(f6_1_2, text='To Team1', command=ad)
-b6_2_2=tb.Button(f6_1_2, text='To Team2')
+submit6_1=tb.Button(f6_1_1_1, text='SUBMIT', command=ab1)
+b6_2_1=tb.Button(f6_1_2, text='To Team1', command=ad1)
+b6_2_2=tb.Button(f6_1_2, text='To Team2', command=ad2)
 l6_1a=tb.Label(f6_1_2_1a,text="Enter Tag of player from reserve")
-l6_2a=tb.Label(f6_1_2_1b,text="Enter Tag of player to swap to team")
+l6_2a=tb.Label(f6_1_2_1b,text="Enter Tag of player in team")
 e6_1a=tb.Entry(f6_1_2_1a)
 e6_2a=tb.Entry(f6_1_2_1b)
-submit6_1a=tb.Button(f6_1_2_1,  text='SUBMIT', command=ab)
+submit6_1a=tb.Button(f6_1_2_1,  text='SUBMIT', command=ab2)
 
 f6_title=tb.Label(f6, text='Swap Players', font=('Times bold', 12), relief='groove', padding=2)
-success6=tb.Label(f6, text='Swap succesfull!!')
+success6=tb.Label(f6, text='Swap succesful!!')
+fail6=tb.Label(f6, text='Swap unsuccesful...')
+fail6_1=tb.Label(f6, text='Fill in both')
+b_reset6=tb.Button(f6, text='Reset selection', command=reset6)
 mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
 
-b6_1.pack()
-b6_2.pack()
+b6_1.pack(side='left')
+b6_2.pack(side='left')
 l6_1.pack(side='left')
 e6_1.pack(side='left')
 f6_1_1_1a.pack(side='left')
@@ -700,6 +784,7 @@ submit6_1a.pack()
 f6_title.pack()
 f6_1.pack()
 mainmenu9.pack(side='bottom')
+b_reset6.pack(side='bottom')
 
 #f7 items
 outputframe7=tb.Frame(f7)
