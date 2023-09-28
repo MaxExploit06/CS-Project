@@ -315,7 +315,7 @@ def addplayer():
     name=pe5.get()
     region=pe6.get()
     rank=pe7.get()
-    ppassword=pe8.get()
+    ppassword=pe1.get()
     q4=f"insert into information values({tag},'{id}','{role}',{score},'{name}','{region}',{rank},{ppassword})"
     try:
         cur.execute(q4)
@@ -459,7 +459,7 @@ def reset6():
     f6_1_2.forget()
 #(Edit team definitions end)
 
-#Update details definition
+#(Update details definition)
 col_choice=''
 col_available=['Tag', 'Player_ID', 'Player_Name', 'Player_Score', 'Region', 'Regional_Rank']
 tag_stored=''
@@ -524,6 +524,42 @@ def reset8():
     up_entry.delete(0, 'end')
     entryframe8_2.forget()
     entryframe8_1.forget()
+#(Update details definition end)
+
+def remove():
+    rem=tag_entry9.get()
+    try:
+        x=int(rem)
+        l = []
+        l1=[]
+        l2=[]
+        q_9_1= f"select tag from information where tag = {rem}"
+        cur.execute(q_9_1)
+        for i in cur:
+            l.append(i[0])
+        if l==[]:
+            fail9_2.pack()
+            root.after(1000, messageclear, fail9_2)
+        else:
+            q_9_2_1 = f"select tag from team1 where tag = {rem}"
+            q_9_2_2 = f"select tag from team2 where tag = {rem}"
+            cur.execute(q_9_2_1)
+            for j in cur:
+                l1.append(j[0])
+            cur.execute(q_9_2_2)
+            for j in cur:
+                l2.append(j[0])
+            if l == l1 or l == l2:
+                fail9_3.pack()
+                root.after(1000, messageclear, fail9_3)
+            else:
+                q_7 = f"delete from information where tag = {rem}"
+                cur.execute(q_7)
+                success9.pack()
+                root.after(1000, messageclear, success9)
+    except:    
+        fail9_1.pack()
+        root.after(1000, messageclear, fail9_1)
 
 
 #Frames
@@ -725,7 +761,6 @@ pe4=tb.Entry(entryframe4)
 pe5=tb.Entry(entryframe4)
 pe6=tb.Entry(entryframe4)
 pe7=tb.Entry(entryframe4)
-pe8=tb.Entry(entryframe4)
 pl1=tb.Label(entryframe4, text='Tag')
 pl2=tb.Label(entryframe4, text='Player ID')
 pl3=tb.Label(entryframe4, text='Role')
@@ -733,7 +768,6 @@ pl4=tb.Label(entryframe4, text='Score')
 pl5=tb.Label(entryframe4, text='Name')
 pl6=tb.Label(entryframe4, text='Region')
 pl7=tb.Label(entryframe4, text='Regional rank')
-pl8=tb.Label(entryframe4, text='Set password')
 submit4=tb.Button(f4, text='Submit', command=addplayer)
 success4=tb.Label(f4, text='Added succesfully')
 fail4=tb.Label(f4, text='Unsuccesful')
@@ -750,7 +784,6 @@ pe4.grid(row= 3, column= 1)
 pe5.grid(row= 4, column= 1)
 pe6.grid(row= 5, column= 1)
 pe7.grid(row= 6, column= 1)
-pe8.grid(row= 7, column= 1)
 pl1.grid(row= 0, column= 0)
 pl2.grid(row= 1, column= 0)
 pl3.grid(row= 2, column= 0)
@@ -758,7 +791,6 @@ pl4.grid(row= 3, column= 0)
 pl5.grid(row= 4, column= 0)
 pl6.grid(row= 5, column= 0)
 pl7.grid(row= 6, column= 0)
-pl8.grid(row= 7, column= 0)
 
 entryframe4.pack()
 submit4.pack()
@@ -954,9 +986,25 @@ mainmenu9.pack(side='bottom')
 b_reset8.pack(side='bottom')
 
 #f9 items
+entryframe9=tb.Frame(f9)
+f9_title=tb.Label(f9, text='Remove player', font=('Times bold', 12), relief='groove', padding=2)
+f9_title1=tb.Label(f9, text='Note- Players playing for either teams cannot be removed.')
 mainmenu9=tb.Button(f9, text='Main Menu', command=mainmenu)
+tag_label9=tb.Label(entryframe9, text='Enter tag of player to be removed')
+tag_entry9=tb.Entry(entryframe9)
+fail9_1=tb.Label(f9, text='Invalid tag')
+fail9_2=tb.Label(f9, text='Player not found')
+fail9_3=tb.Label(f9, text="Can't execute command because player already exist in a team")
+success9=tb.Label(f9, text='Player removed successfully')
+tag_submit9=tb.Button(entryframe9, image=isend, command=remove)
 
-mainmenu9.pack()
+tag_label9.pack(side='left')
+tag_entry9.pack(side='left')
+tag_submit9.pack(side='left')
+f9_title.pack()
+f9_title1.pack()
+entryframe9.pack()
+mainmenu9.pack(side='bottom')
 
 #Main frames set up
 root.grid_rowconfigure(0, weight=1)
