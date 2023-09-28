@@ -1,3 +1,4 @@
+from faulthandler import disable
 import mysql.connector as mc
 from tkinter import *
 import ttkbootstrap as tb
@@ -38,6 +39,10 @@ resized_hide = hide1.resize((16, 16))
 see=ImageTk.PhotoImage(resized_see)
 hide=ImageTk.PhotoImage(resized_hide)
 
+search1=Image.open("E:\\___Python Programs\\CS-Project\\search.png")
+resized_search = search1.resize((16, 16))
+isearch=ImageTk.PhotoImage(resized_search)
+
 def update_gif(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
     if frame_index==56:
@@ -45,6 +50,12 @@ def update_gif(canvas, img, frame_index):
     else:
         root.after(30, update_gif, canvas, img, (frame_index + 1) % len(img))
 
+def update_gif2(canvas, img, frame_index):
+    canvas.itemconfig(bg_img, image=img[frame_index])
+    if frame_index==56:
+        MP.tkraise()
+    else:
+        root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
 
 def gif():
     LA1.tkraise()
@@ -65,6 +76,28 @@ def gif():
 
     # Start the animation loop
     update_gif(canvas, frames, 0)
+    
+    # Add other widgets and functionality here
+
+def gif2():
+    LP1.tkraise()
+    global bg_img
+    # Load the animated GIF image
+    gif_path = "E:\\___Python Programs\\CS-Project\\loading.gif"
+    gif = Image.open(gif_path)
+    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
+
+    # Create a Canvas widget to display the GIF background
+    canvas = tb.Canvas(LP1, width=800, height=600)
+    LP1.grid_rowconfigure(0, weight=1)
+    LP1.grid_columnconfigure(0, weight=1)
+    canvas.grid(row=0,column=0, sticky="nsew")
+
+    # Create a background image on the Canvas
+    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
+
+    # Start the animation loop
+    update_gif2(canvas, frames, 0)
     
     # Add other widgets and functionality here
     
@@ -108,7 +141,19 @@ def p_eye_toggle():
         Peye.config(image=see)
         t2=1
 
+def messageclear(label):
+    label.forget()
 
+def on_entry_click(event):
+    """function that gets called whenever entry is clicked"""
+    if s_tag.get() == 'Enter player tag':
+       s_tag.delete(0, "end") # delete all the text in the entry
+       s_tag.insert(0, '') #Insert blank for user input
+       s_tag.config(foreground='')
+def on_focusout(event):
+    if s_tag.get() == '':
+        s_tag.insert(0, 'Enter player tag')
+        s_tag.config(foreground='grey')
 
 #Account system
 
@@ -170,6 +215,7 @@ def player_login():
         if username and password:
            if plogin(username, password):
             LP1.tkraise()
+            gif2()
            else:
             LP_title1.config(text="Login failed")
         else:
@@ -256,6 +302,159 @@ def team_score(team):
     for i in cur:
         score = i[0]
     scoremessage.set(f'The team score is {score}')
+
+def addplayer():
+    tag=pe1.get()
+    id=pe2.get()
+    role=pe3.get()
+    score=pe4.get()
+    name=pe5.get()
+    region=pe6.get()
+    rank=pe7.get()
+    ppassword=pe8.get()
+    q4=f"insert into information values({tag},'{id}','{role}',{score},'{name}','{region}',{rank},{ppassword})"
+    try:
+        cur.execute(q4)
+        success4.pack()
+        root.after(2000, messageclear, success4)
+    except:
+        fail4.pack()
+        root.after(2000, messageclear, fail4)
+
+def addum():
+    name=ume1.get()
+    date=ume2.get()
+    team=ume3.get()
+    prize=ume4.get()
+    q5=f"insert into schedule values('{name}','{date}','{team}',{prize})"
+    try:
+        cur.execute(q5)
+        success5.pack()
+        root.after(2000, messageclear, success5)
+    except:
+        fail5.pack()
+        root.after(2000, messageclear, fail5)
+
+def search():
+    outputframe7.forget()
+    for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
+        entry.config(state='normal')
+        entry.delete(1.0, 'end')
+    tag=s_tag.get()
+    try:
+        x=int(tag)
+        q_5 = f"Select * from information where Tag = '{tag}'"
+        cur.execute(q_5)
+        records = cur.fetchall()
+        if records == []:
+            fail7_1.pack()
+            root.after(2000, messageclear, fail7_1)
+        for row in records:
+            ope1.insert(1.0, str(row[0]) )
+            ope2.insert(1.0, str(row[1]) )
+            ope3.insert(1.0, str(row[2]) )
+            ope4.insert(1.0, str(row[3]) )
+            ope5.insert(1.0, str(row[4]) )
+            ope6.insert(1.0, str(row[5]) )
+            ope7.insert(1.0, str(row[6]) )
+            outputframe7.pack()
+    except:
+        fail7_2.pack()
+        root.after(2000, messageclear, fail7_2)
+    for entry in [ope1,ope2,ope3,ope4,ope5,ope6,ope7]:
+        entry.config(state='disabled')
+
+#temp
+swapchoice2=0
+def nope():
+    pass
+def aa():
+    f6_1_1_1.pack()
+    b6_1.config(state='disabled')
+    b6_2.config(command=nope)
+def ab1():
+    xTag=e6_1.get()
+    yTag=e6_2.get()
+    if xTag and yTag:
+        try:
+            cur.execute(f'select * from team1 where Tag = {xTag}')
+            for i in cur:
+                xID= i[1]
+                xRole= i[2]
+                xScore= i[3]
+            cur.execute(f'select * from team2 where Tag = {yTag}')
+            for j in cur:
+                yID= j[1]
+                yRole= j[2]
+                yScore= j[3]
+            q1 = f"Update team1 set Tag={yTag},Player_ID='{yID}',Role='{yRole}',Player_Score={yScore} where Tag = {xTag}"
+            q2 = f"Update team2 set Tag={xTag},Player_ID='{xID}',Role='{xRole}',Player_Score={xScore} where Tag = {yTag}"
+            cur.execute(q1)
+            cur.execute(q2)
+            success6.pack()
+            root.after(2000, messageclear, success6)
+        except:
+            fail6.pack()
+            root.after(2000, messageclear, fail6)
+    else:
+        fail6_1.pack()
+        root.after(2000, messageclear, fail6_1)
+def ab2():
+    if swapchoice2 == 1:
+        team='team1'
+    elif swapchoice2 == 2:
+        team='team2'
+    xTag=e6_2a.get()
+    zTag=e6_1a.get()
+    if xTag and zTag:
+        try:
+            cur.execute(f"select * from information where Tag = {zTag}")
+            for i in cur:
+                zID= i[1]
+                zRole= i[2]
+                zScore= i[3]
+
+            q1 = f"Update {team} set Tag={zTag},Player_ID='{zID}',Role='{zRole}',Player_Score={zScore} where Tag = {xTag}"
+            cur.execute(q1)
+            success6.pack()
+            root.after(2000, messageclear, success6)
+        except:
+            fail6.pack()
+            root.after(2000, messageclear, fail6)   
+    else:
+        fail6_1.pack()
+        root.after(2000, messageclear, fail6_1)    
+def ac():
+    f6_1_2.pack()
+    b6_2.config(state='disabled')
+    b6_1.config(command=nope)
+def ad1():
+    global swapchoice2
+    f6_1_2_1.pack()
+    b6_2_1.config(state='disabled')
+    b6_2_2.config(command=nope)
+    swapchoice2=1
+def ad2():
+    global swapchoice2
+    f6_1_2_1.pack()
+    b6_2_2.config(state='disabled')
+    b6_2_1.config(command=nope)
+    swapchoice2=2
+
+def reset6():
+    e6_1.delete(0, 'end')
+    e6_2.delete(0, 'end')
+    e6_1a.delete(0, 'end')
+    e6_2a.delete(0, 'end')
+    b6_1.config(state='normal', command=aa)
+    b6_2.config(state='normal', command=ac)
+    b6_2_1.config(state='normal', command=ad1)
+    b6_2_2.config(state='normal', command=ad2)
+    f6_1_1_1.forget()
+    f6_1_1.forget()
+    f6_1_2_1.forget()
+    f6_1_2.forget()
+
 
 #Frames
 L1=tb.Frame(root)
@@ -362,7 +561,7 @@ b7=Button(M1_3, text='Search player', padx=39, pady=5, command=f7_swap)
 b8=Button(M1_3, text='Update player details', padx=20, pady=5, command=f8_swap)
 b9=Button(M1_3, text='Remove player', padx=36, pady=5, command=f9_swap)
 swap_val= IntVar()
-themebutton=tb.Checkbutton(M1,bootstyle="light,toolbutton,outline",text="Switch Theme",variable=swap_val,onvalue=1,offvalue=0, command=themeswap)
+themebutton=tb.Checkbutton(M1, bootstyle="light,toolbutton,outline",text="Switch Theme",variable=swap_val,onvalue=1,offvalue=0, command=themeswap)
 
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=('Times bold', 25), relief='groove', padding=5)
 
@@ -387,7 +586,7 @@ f1_title1=tb.Label(f1, text='Select a team to view their upcoming matches')
 f1_1=tb.Frame(f1)
 team1=tb.Button(f1_1, text='Team 1', command=lambda: um(1))
 team2=tb.Button(f1_1, text='Team 2', command=lambda: um(2))
-area=tb.Text(f1, height= 15, width= 52,font="halvetica, 15", relief='sunken', state='disable')
+area=tb.Text(f1, height= 15, width= 52, relief='sunken', state='disable')
 mainmenu9=tb.Button(f1, text='Main Menu', command=mainmenu)
 
 f1_title.pack()
@@ -446,24 +645,197 @@ scorelabel.pack()
 mainmenu9.pack(side='bottom')
 
 #f4 items
+entryframe4=tb.Frame(f4)
+f4_title=tb.Label(f4, text='Add Player', font=('Times bold', 12), relief='groove', padding=2)
+f4_title1=tb.Label(f4, text='Input Details')
+pe1=tb.Entry(entryframe4)
+pe2=tb.Entry(entryframe4)
+pe3=tb.Entry(entryframe4)
+pe4=tb.Entry(entryframe4)
+pe5=tb.Entry(entryframe4)
+pe6=tb.Entry(entryframe4)
+pe7=tb.Entry(entryframe4)
+pe8=tb.Entry(entryframe4)
+pl1=tb.Label(entryframe4, text='Tag')
+pl2=tb.Label(entryframe4, text='Player ID')
+pl3=tb.Label(entryframe4, text='Role')
+pl4=tb.Label(entryframe4, text='Score')
+pl5=tb.Label(entryframe4, text='Name')
+pl6=tb.Label(entryframe4, text='Region')
+pl7=tb.Label(entryframe4, text='Regional rank')
+pl8=tb.Label(entryframe4, text='Set password')
+submit4=tb.Button(f4, text='Submit', command=addplayer)
+success4=tb.Label(f4, text='Added succesfully')
+fail4=tb.Label(f4, text='Unsuccesful')
 mainmenu9=tb.Button(f4, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+
+f4_title.pack()
+f4_title1.pack()
+
+pe1.grid(row= 0, column= 1)
+pe2.grid(row= 1, column= 1)
+pe3.grid(row= 2, column= 1)
+pe4.grid(row= 3, column= 1)
+pe5.grid(row= 4, column= 1)
+pe6.grid(row= 5, column= 1)
+pe7.grid(row= 6, column= 1)
+pe8.grid(row= 7, column= 1)
+pl1.grid(row= 0, column= 0)
+pl2.grid(row= 1, column= 0)
+pl3.grid(row= 2, column= 0)
+pl4.grid(row= 3, column= 0)
+pl5.grid(row= 4, column= 0)
+pl6.grid(row= 5, column= 0)
+pl7.grid(row= 6, column= 0)
+pl8.grid(row= 7, column= 0)
+
+entryframe4.pack()
+submit4.pack()
+mainmenu9.pack(side='bottom')
 
 #f5 items
+entryframe5=tb.Frame(f5)
+f5_title=tb.Label(f5, text='Add Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
+f5_title1=tb.Label(f5, text='Input Details')
+ume1=tb.Entry(entryframe5)
+ume2=tb.Entry(entryframe5)
+ume3=tb.Entry(entryframe5)
+ume4=tb.Entry(entryframe5)
+uml1=tb.Label(entryframe5, text='League')
+uml2=tb.Label(entryframe5, text='Date')
+uml3=tb.Label(entryframe5, text='Participants')
+uml4=tb.Label(entryframe5, text='Price')
+
+submit5=tb.Button(f5, text='Submit', command=addum)
+success5=tb.Label(f5, text='Added succesfully')
+fail5=tb.Label(f5, text='Unsuccesful')
 mainmenu9=tb.Button(f5, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+
+f5_title.pack()
+f5_title1.pack()
+
+ume1.grid(row= 0, column= 1)
+ume2.grid(row= 1, column= 1)
+ume3.grid(row= 2, column= 1)
+ume4.grid(row= 3, column= 1)
+uml1.grid(row= 0, column= 0)
+uml2.grid(row= 1, column= 0)
+uml3.grid(row= 2, column= 0)
+uml4.grid(row= 3, column= 0)
+
+entryframe5.pack()
+submit5.pack()
+mainmenu9.pack(side='bottom')
 
 #f6 items
+f6_1=tb.Frame(f6)
+f6_1_1=tb.Frame(f6)
+f6_1_1_1=tb.Frame(f6)
+f6_1_1_1a=tb.Frame(f6_1_1_1)
+f6_1_1_1b=tb.Frame(f6_1_1_1)
+f6_1_2=tb.Frame(f6)
+f6_1_2_1=tb.Frame(f6)
+f6_1_2_1a=tb.Frame(f6_1_2_1)
+f6_1_2_1b=tb.Frame(f6_1_2_1)
+
+b6_1=tb.Button(f6_1, text='Between Teams', command=aa)
+b6_2=tb.Button(f6_1, text='From Reserve to Teams', command=ac)
+l6_1=tb.Label(f6_1_1_1a,text="Enter Tag of player to swap from Team 1")
+l6_2=tb.Label(f6_1_1_1b,text="Enter Tag of player to swap from Team 2")
+e6_1=tb.Entry(f6_1_1_1a)
+e6_2=tb.Entry(f6_1_1_1b)
+submit6_1=tb.Button(f6_1_1_1, text='SUBMIT', command=ab1)
+b6_2_1=tb.Button(f6_1_2, text='To Team1', command=ad1)
+b6_2_2=tb.Button(f6_1_2, text='To Team2', command=ad2)
+l6_1a=tb.Label(f6_1_2_1a,text="Enter Tag of player from reserve")
+l6_2a=tb.Label(f6_1_2_1b,text="Enter Tag of player in team")
+e6_1a=tb.Entry(f6_1_2_1a)
+e6_2a=tb.Entry(f6_1_2_1b)
+submit6_1a=tb.Button(f6_1_2_1,  text='SUBMIT', command=ab2)
+
+f6_title=tb.Label(f6, text='Swap Players', font=('Times bold', 12), relief='groove', padding=2)
+success6=tb.Label(f6, text='Swap succesful!!')
+fail6=tb.Label(f6, text='Swap unsuccesful...')
+fail6_1=tb.Label(f6, text='Fill in both')
+b_reset6=tb.Button(f6, text='Reset selection', command=reset6)
 mainmenu9=tb.Button(f6, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+b6_1.pack(side='left')
+b6_2.pack(side='left')
+l6_1.pack(side='left')
+e6_1.pack(side='left')
+f6_1_1_1a.pack(side='left')
+l6_2.pack(side='left')
+e6_2.pack(side='left')
+f6_1_1_1b.pack(side='left')
+submit6_1.pack()
+b6_2_1.pack(side='left')
+b6_2_2.pack(side='left')
+l6_1a.pack(side='left')
+e6_1a.pack(side='left')
+f6_1_2_1a.pack(side='left')
+l6_2a.pack(side='left')
+e6_2a.pack(side='left')
+f6_1_2_1b.pack(side='left')
+submit6_1a.pack()
+
+f6_title.pack()
+f6_1.pack()
+mainmenu9.pack(side='bottom')
+b_reset6.pack(side='bottom')
 
 #f7 items
+outputframe7=tb.Frame(f7)
+searchbar=tb.Frame(f7)
+f7_title=tb.Label(f7, text='Search Players', font=('Times bold', 12), relief='groove', padding=2)
+s_tag=tb.Entry(searchbar)
+s_tag.insert(0, 'Enter player tag')
+s_tag.config(foreground='grey')
+s_tag.bind('<FocusIn>', on_entry_click)
+s_tag.bind('<FocusOut>', on_focusout)
+
+ope1=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope2=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope3=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope4=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope5=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope6=tb.Text(outputframe7, height=1, width=20, state='disabled')
+ope7=tb.Text(outputframe7, height=1, width=20, state='disabled')
+opl1=tb.Label(outputframe7, text='Tag')
+opl2=tb.Label(outputframe7, text='Player ID')
+opl3=tb.Label(outputframe7, text='Role')
+opl4=tb.Label(outputframe7, text='Score')
+opl5=tb.Label(outputframe7, text='Name')
+opl6=tb.Label(outputframe7, text='Region')
+opl7=tb.Label(outputframe7, text='Regional rank')
+
+fail7_1=tb.Label(f7, text='Player not found')
+fail7_2=tb.Label(f7, text='Invalid tag')
+s_button=tb.Button(searchbar, image=isearch, command=search)
 mainmenu9=tb.Button(f7, text='Main Menu', command=mainmenu)
 
-mainmenu9.pack()
+ope1.grid(row= 0, column= 1)
+ope2.grid(row= 1, column= 1)
+ope3.grid(row= 2, column= 1)
+ope4.grid(row= 3, column= 1)
+ope5.grid(row= 4, column= 1)
+ope6.grid(row= 5, column= 1)
+ope7.grid(row= 6, column= 1)
+opl1.grid(row= 0, column= 0)
+opl2.grid(row= 1, column= 0)
+opl3.grid(row= 2, column= 0)
+opl4.grid(row= 3, column= 0)
+opl5.grid(row= 4, column= 0)
+opl6.grid(row= 5, column= 0)
+opl7.grid(row= 6, column= 0)
+
+f7_title.pack()
+s_tag.pack(side='left')
+s_button.pack(side='left')
+searchbar.pack()
+mainmenu9.pack(side='bottom')
 
 #f8 items
 mainmenu9=tb.Button(f8, text='Main Menu', command=mainmenu)
