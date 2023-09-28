@@ -561,6 +561,7 @@ def meter2_gif(x):
         else:
             root.after(30, meter2_gif, x+1)
 
+
 def addplayer():
     click()
     tag=pe1.get()
