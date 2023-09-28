@@ -13,7 +13,7 @@ import pygame
 #check
 
 #MySQL connection
-mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 
