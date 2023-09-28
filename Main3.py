@@ -58,6 +58,7 @@ def update_gif2(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
     if frame_index==56:
         MP.tkraise()
+        display()
     else:
         root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
 
@@ -199,17 +200,37 @@ def admin_login():
     else:
         LA_title1.config(text="Please enter both username and password")
 
+player_details=[]
+
 def plogin(username, password):
+    global player_details
     q=f"select * from information where Player_ID = '{username}' and Password= {password}"
     cur.execute(q)
-    record=cur.fetchall
-    if record==[]:
+    player_details=cur.fetchall()
+    if player_details==[]:
         return False
     else:
         return True
 
+def display():
+    global player_details
+    outputframe.forget()
+    for entry in [MP_ope1,MP_ope2,MP_ope3,MP_ope4,MP_ope5,MP_ope6,MP_ope7]:
+        entry.config(state='normal')
+        entry.delete(1.0, 'end')
+    for row in player_details:
+        MP_ope1.insert(1.0, str(row[0]) )
+        MP_ope2.insert(1.0, str(row[1]) )
+        MP_ope3.insert(1.0, str(row[2]) )
+        MP_ope4.insert(1.0, str(row[3]) )
+        MP_ope5.insert(1.0, str(row[4]) )
+        MP_ope6.insert(1.0, str(row[5]) )
+        MP_ope7.insert(1.0, str(row[6]) )
+    for entry in [MP_ope1,MP_ope2,MP_ope3,MP_ope4,MP_ope5,MP_ope6,MP_ope7]:
+        entry.config(state='disabled')
+    outputframe.pack()
 def player_login():
-    global Pus2, Ppw2
+    global player_details
     username=Pus2.get()
     Aus2.delete(0, END)
     password=Ppw2.get()
@@ -624,7 +645,7 @@ submit1.pack()
 LA_back.pack()
 
 #LA1 items
-load=tb.Label(LA1)
+load1=tb.Label(LA1)
 
 
 #LP items
@@ -651,6 +672,50 @@ LP_1.pack()
 LP_2.pack()
 submit2.pack()
 LP_back.pack()
+
+#LP1 items
+load2=tb.Label(LP1)
+
+#MP items
+MP_title=tb.Label(MP, text= 'Welcome')
+outputframe=tb.Frame(MP)
+
+MP_ope1=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope2=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope3=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope4=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope5=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope6=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_ope7=tb.Text(outputframe, height=1, width=20, state='disabled')
+MP_opl1=tb.Label(outputframe, text='Tag')
+MP_opl2=tb.Label(outputframe, text='Player ID')
+MP_opl3=tb.Label(outputframe, text='Role')
+MP_opl4=tb.Label(outputframe, text='Score')
+MP_opl5=tb.Label(outputframe, text='Name')
+MP_opl6=tb.Label(outputframe, text='Region')
+MP_opl7=tb.Label(outputframe, text='Regional rank')
+
+MP_logout=tb.Button(MP, text='LOGOUT', command=logout)
+
+MP_ope1.grid(row= 0, column= 1)
+MP_ope2.grid(row= 1, column= 1)
+MP_ope3.grid(row= 2, column= 1)
+MP_ope4.grid(row= 3, column= 1)
+MP_ope5.grid(row= 4, column= 1)
+MP_ope6.grid(row= 5, column= 1)
+MP_ope7.grid(row= 6, column= 1)
+MP_opl1.grid(row= 0, column= 0)
+MP_opl2.grid(row= 1, column= 0)
+MP_opl3.grid(row= 2, column= 0)
+MP_opl4.grid(row= 3, column= 0)
+MP_opl5.grid(row= 4, column= 0)
+MP_opl6.grid(row= 5, column= 0)
+MP_opl7.grid(row= 6, column= 0)
+
+MP_title.pack()
+outputframe.pack()
+MP_logout.pack(side='bottom')
+
 
 #M1 items
 M1_1=tb.Frame(M1)
@@ -1009,7 +1074,7 @@ mainmenu9.pack(side='bottom')
 #Main frames set up
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
-frames=[L1,LA,LP,LA1,LP1,M1,f1,f2,f3,f4,f5,f6,f7,f8,f9]
+frames=[L1,LA,LP,LA1,LP1,MP,M1,f1,f2,f3,f4,f5,f6,f7,f8,f9]
 for frame in frames:
     frame.grid(row=0, column=0, sticky="nsew")
 
