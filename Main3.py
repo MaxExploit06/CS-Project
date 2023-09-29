@@ -14,7 +14,7 @@ from datetime import date
 #check
 
 #MySQL connection
-mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 
@@ -35,25 +35,25 @@ def click():
     pygame.mixer.music.play(loops=0)
 
 #Images
-admin1=Image.open('admin.png')
-player1=Image.open('player.png')
+admin1=Image.open(os.getcwd()+"\\images\\admin.png")
+player1=Image.open(os.getcwd()+"\\images\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open('see.png')
-hide1=Image.open('hide.png')
+see1=Image.open(os.getcwd()+"\\images\\see.png")
+hide1=Image.open(os.getcwd()+"\\images\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 see=ImageTk.PhotoImage(resized_see)
 hide=ImageTk.PhotoImage(resized_hide)
 
-search1=Image.open('search.png')
+search1=Image.open(os.getcwd()+"\\images\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
 
-send1=Image.open('send.png')
+send1=Image.open(os.getcwd()+"\\images\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
 
@@ -77,7 +77,7 @@ def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = "loading.gif"
+    gif_path = os.getcwd()+"\\images\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -94,7 +94,7 @@ def GIF1_light():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = "loading2.gif"
+    gif_path = os.getcwd()+"\\images\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -111,7 +111,7 @@ def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = "loading.gif"
+    gif_path = os.getcwd()+"\\images\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -128,7 +128,7 @@ def GIF2_light():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = "loading2.gif"
+    gif_path = os.getcwd()+"\\images\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
