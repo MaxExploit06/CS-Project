@@ -168,8 +168,8 @@ def themeswap():
         b6_2_2.config(style="danger.TButton")
         b_admin.config(style="danger.TButton")
         b_player.config(style="danger.TButton")
-        b_reset6.config(style="danger.TButton")
-        b_reset8.config(style="danger.TButton")
+        b_reset6.config(style="danger.Outline.TButton")
+        b_reset8.config(style="danger.Outline.TButton")
         submit1.config(style="danger.TButton")
         submit2.config(style="danger.TButton")
         submit4.config(style="danger.TButton")
@@ -195,8 +195,8 @@ def themeswap():
         mainmenu9.config(style="danger.TButton")
         dteam1.config(style="danger.TButton")
         dteam2.config(style="danger.TButton")
-        '''steam1.config(style="danger.TButton")
-        steam2.config(style="danger.TButton")'''
+        meter1.configure(bootstyle='danger')
+        meter2.configure(bootstyle='danger')
         tag_submit.config(style="danger.TButton")
         up_submit.config(style="danger.TButton")
         s_button.config(style="danger.TButton")
@@ -227,8 +227,8 @@ def themeswap():
         b6_2_2.config(style="primary.TButton")
         b_admin.config(style="primary.TButton")
         b_player.config(style="primary.TButton")
-        b_reset6.config(style="primary.TButton")
-        b_reset8.config(style="primary.TButton")
+        b_reset6.config(style="primary.Outline.TButton")
+        b_reset8.config(style="primary.Outline.TButton")
         submit1.config(style="primary.TButton")
         submit2.config(style="primary.TButton")
         submit4.config(style="primary.TButton")
@@ -254,8 +254,8 @@ def themeswap():
         mainmenu9.config(style="primary.TButton")
         dteam1.config(style="primary.TButton")
         dteam2.config(style="primary.TButton")
-        '''steam1.config(style="primary.TButton")
-        steam2.config(style="primary.TButton")'''
+        meter1.configure(bootstyle='primary')
+        meter2.configure(bootstyle='primary')
         tag_submit.config(style="primary.TButton")
         up_submit.config(style="primary.TButton")
         s_button.config(style="primary.TButton")
@@ -547,8 +547,8 @@ def meter1_gif(x):
         meter1.configure(amountused = x)
         if x==teamscore1:
             pass
-        elif x < teamscore1-6:
-            root.after(30, meter1_gif, x+5)
+        elif x < teamscore1-15:
+            root.after(30, meter1_gif, x+10)
         else:
             root.after(30, meter1_gif, x+1)
 def meter2_gif(x):
@@ -556,8 +556,8 @@ def meter2_gif(x):
         meter2.configure(amountused = x)
         if x==teamscore2:
             pass
-        elif x < teamscore2-6:
-            root.after(30, meter2_gif, x+5)
+        elif x < teamscore2-15:
+            root.after(30, meter2_gif, x+10)
         else:
             root.after(30, meter2_gif, x+1)
 
@@ -1059,9 +1059,9 @@ steam2=tb.Button(f3_1, text='Team 2', command=lambda: team_score(2))'''
 mainmenu3=tb.Button(f3, text='Main Menu', command=fmainmenu3)
 scorelabel=tb.Label(f3)
 meters=tb.Frame(f3)
-meter1=tb.Meter(meters, bootstyle='danger', subtext='TEAM 1', interactive=False, textright='/400',
+meter1=tb.Meter(meters, bootstyle='primary', subtext='TEAM 1', interactive=False, textright='/400',
               metertype='semi', amounttotal=400, amountused=0)
-meter2=tb.Meter(meters, bootstyle='danger', subtext='TEAM 2', interactive=False, textright='/400',
+meter2=tb.Meter(meters, bootstyle='primary', subtext='TEAM 2', interactive=False, textright='/400',
               metertype='semi', amounttotal=400, amountused=0)
 refresh=tb.Button(f3, text= 'Refresh', command= team_score_update, style="primary.Outline.TButton")
 
@@ -1188,7 +1188,7 @@ f6_title=tb.Label(f6, text='Swap Players', font=('Times bold', 12), relief='groo
 success6=tb.Label(f6, text='Swap succesful!!')
 fail6=tb.Label(f6, text='Swap unsuccesful...')
 fail6_1=tb.Label(f6, text='Fill in both')
-b_reset6=tb.Button(f6, text='Reset selection', command=reset6)
+b_reset6=tb.Button(f6, text='Reset selection', command=reset6, style="primary.Outline.TButton")
 mainmenu6=tb.Button(f6, text='Main Menu', command=fmainmenu6)
 
 b6_1.pack(side='left')
@@ -1290,7 +1290,7 @@ fail8_1=tb.Label(f8, text='Invalid tag')
 fail8_2=tb.Label(f8, text='No player found')
 fail8_3=tb.Label(f8, text='Error. Try again')
 success8=tb.Label(f8, text='Update successful')
-b_reset8=tb.Button(f8, text='Reset selection', command=reset8)
+b_reset8=tb.Button(f8, text='Reset selection', command=reset8,style="primary.Outline.TButton")
 mainmenu8=tb.Button(f8, text='Main Menu', command=fmainmenu8)
 
 c_1.grid(row= 0,column= 0)
