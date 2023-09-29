@@ -329,9 +329,6 @@ def player_login():
             LP_title1.config(text="invalid password")
     else:
         LP_title1.config(text="Please enter both username and password")
-    
-    
-
 
 #page swap definitions
 def admin_login_swap():
