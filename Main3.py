@@ -307,6 +307,7 @@ def display():
     for entry in [MP_ope1,MP_ope2,MP_ope3,MP_ope4,MP_ope5,MP_ope6,MP_ope7]:
         entry.config(state='disabled')
     outputframe.pack()
+
 def player_login():
     click()
     global player_details, t
@@ -321,8 +322,10 @@ def player_login():
                 LP1.tkraise()
                 if t==0:
                     GIF2_dark(LP1,MP,root)
+                    root.after(200,display)
                 elif t==1:
                     GIF2_light(LP1,MP,root)
+                    root.after(200,display)
             else:
                 LP_title1.config(text="Login failed")
         except:

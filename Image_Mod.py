@@ -6,13 +6,6 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
-# root
-'''root=tb.Window()
-root.title('eSports Management System')
-root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
-root.geometry('960x540')
-tb.Style(theme="cyborg") ; t=0
-'''
 
 def update_gif(canvas, img, frame_index, M1, root):
     canvas.itemconfig(bg_img, image=img[frame_index])
