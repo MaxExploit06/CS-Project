@@ -11,7 +11,8 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from datetime import date
 
-#check
+# Self-Made modules
+from Image_Mod import *
 
 #MySQL connection
 mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
@@ -22,7 +23,7 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap('EMS.ico')
+root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
@@ -31,124 +32,39 @@ colors=root.style.colors
 pygame.mixer.init()
 
 def click():
-    pygame.mixer.music.load('click.mp3')
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\click.mp3")
     pygame.mixer.music.play(loops=0)
 
-#Images
-admin1=Image.open('admin.png')
-player1=Image.open('player.png')
+
+#Images_________________________________________in Image_Mod
+admin1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\admin.png")
+player1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open('see.png')
-hide1=Image.open('hide.png')
+see1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\see.png")
+hide1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 see=ImageTk.PhotoImage(resized_see)
 hide=ImageTk.PhotoImage(resized_hide)
 
-search1=Image.open('search.png')
+search1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
 
-send1=Image.open('send.png')
+send1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
-
-def update_gif(canvas, img, frame_index):
-    canvas.itemconfig(bg_img, image=img[frame_index])
-    if frame_index==56:
-        M1.tkraise()
-    else:
-        root.after(30, update_gif, canvas, img, (frame_index + 1) % len(img))
-
-def update_gif2(canvas, img, frame_index):
-    canvas.itemconfig(bg_img, image=img[frame_index])
-    if frame_index==56:
-        MP.tkraise()
-        display()
-    else:
-        root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
-
-
-def GIF1_dark():
-    LA1.tkraise()
-    global bg_img
-    # Load the animated GIF image
-    gif_path = "loading.gif"
-    gif = Image.open(gif_path)
-    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-    # Create a Canvas widget to display the GIF background
-    canvas = tb.Canvas(LA1, width=800, height=600)
-    LA1.grid_rowconfigure(0, weight=1)
-    LA1.grid_columnconfigure(0, weight=1)
-    canvas.grid(row=0,column=0, sticky="nsew")
-    # Create a background image on the Canvas
-    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-    # Start the animation loop
-    update_gif(canvas, frames, 0)
-
-def GIF1_light():
-    LA1.tkraise()
-    global bg_img
-    # Load the animated GIF image
-    gif_path = "loading2.gif"
-    gif = Image.open(gif_path)
-    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-    # Create a Canvas widget to display the GIF background
-    canvas = tb.Canvas(LA1, width=800, height=600)
-    LA1.grid_rowconfigure(0, weight=1)
-    LA1.grid_columnconfigure(0, weight=1)
-    canvas.grid(row=0,column=0, sticky="nsew")
-    # Create a background image on the Canvas
-    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-    # Start the animation loop
-    update_gif(canvas, frames, 0)
-
-def GIF2_dark():
-    LP1.tkraise()
-    global bg_img
-    # Load the animated GIF image
-    gif_path = "loading.gif"
-    gif = Image.open(gif_path)
-    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-    # Create a Canvas widget to display the GIF background
-    canvas = tb.Canvas(LP1, width=800, height=600)
-    LP1.grid_rowconfigure(0, weight=1)
-    LP1.grid_columnconfigure(0, weight=1)
-    canvas.grid(row=0,column=0, sticky="nsew")
-    # Create a background image on the Canvas
-    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-    # Start the animation loop
-    update_gif2(canvas, frames, 0)
-
-def GIF2_light():
-    LP1.tkraise()
-    global bg_img
-    # Load the animated GIF image
-    gif_path = "loading2.gif"
-    gif = Image.open(gif_path)
-    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
-    # Create a Canvas widget to display the GIF background
-    canvas = tb.Canvas(LP1, width=800, height=600)
-    LP1.grid_rowconfigure(0, weight=1)
-    LP1.grid_columnconfigure(0, weight=1)
-    canvas.grid(row=0,column=0, sticky="nsew")
-    # Create a background image on the Canvas
-    bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
-    # Start the animation loop
-    update_gif2(canvas, frames, 0)
-
-    
 
 t1=1 ; t2=1
 
 #other definitions
 def themeswap():
     global t, gif_path
-    pygame.mixer.music.load('toggle.mp3')
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\toggle.mp3")
     pygame.mixer.music.play(loops=0)
     if t==0:
         tb.Style(theme="cosmo")
@@ -320,7 +236,7 @@ def on_click(event):
 
 #Account system
 
-logging.basicConfig(filename='login_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+"\\CS-Project\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -334,7 +250,7 @@ def hash_password(password):
         file.write(f"{username}:{hash_password(password)}\n")'''
 
 def login(username, password):
-    with open('user_accounts.txt', 'r') as file:
+    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
@@ -354,9 +270,9 @@ def admin_login():
         if login(username, password):
             LA1.tkraise()
             if t==0:
-                GIF1_dark()
+                GIF1_dark(LA1,M1,root)
             elif t==1:
-                GIF1_light()
+                GIF1_light(LA1,M1,root)
         else:
             LA_title1.config(text="Login failed")
     else:
@@ -404,9 +320,9 @@ def player_login():
             if plogin(username, password):
                 LP1.tkraise()
                 if t==0:
-                    GIF2_dark()
+                    GIF2_dark(LP1,MP,root)
                 elif t==1:
-                    GIF2_light()
+                    GIF2_light(LP1,MP,root)
             else:
                 LP_title1.config(text="Login failed")
         except:
@@ -781,7 +697,7 @@ def submit8_2():
             q_8 = f"Update information set {col} = {up} where tag = {row}"
             cur.execute(q_8)
         elif col == "Player_ID" or col == "Player_Name" or col == "Region":
-            q_8 = f"Update information set {col} = '{up}' where tag = {row}"
+            q_8Update = f"Update information set {col} = '{up}' where tag = {row}"
             cur.execute(q_8)
         elif col == "Tag":
             q_8 = f"Update information set {col} = {up} where tag = {row}"
