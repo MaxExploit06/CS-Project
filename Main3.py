@@ -311,6 +311,9 @@ def on_focusout(event):
         s_tag.insert(0, 'Enter player tag')
         s_tag.config(foreground='grey')
 
+def on_date_click(event):
+    click()
+
 #Account system
 
 logging.basicConfig(filename='login_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -1132,6 +1135,8 @@ f5_title=tb.Label(f5, text='Add Upcoming Matches', font=('Times bold', 12), reli
 f5_title1=tb.Label(f5, text='Input Details')
 ume1=tb.Entry(entryframe5)
 ume2=tb.DateEntry(entryframe5, dateformat='%Y-%m-%d', bootstyle='primary', firstweekday=0, startdate=date.today())
+ume2.button.config(command=lambda: [ume2._on_date_ask(), click()])
+ume2.button.bind('<FocusIn>', on_date_click)
 ume3=tb.Entry(entryframe5)
 ume4=tb.Entry(entryframe5)
 uml1=tb.Label(entryframe5, text='League')
