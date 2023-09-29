@@ -9,6 +9,7 @@ import logging
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
+from datetime import date
 
 #check
 
@@ -467,8 +468,10 @@ def fmainmenu4():
     M1.tkraise()
 def fmainmenu5():
     click()
-    for entry in [ume1,ume2,ume3,ume4]:
+    for entry in [ume1,ume3,ume4]:
         entry.delete(0, 'end')
+    ume2.entry.delete(0, 'end')
+    ume2.entry.insert(0, ume2._startdate.strftime(ume2._dateformat))
     M1.tkraise()
 def fmainmenu6():
     reset6()
@@ -584,7 +587,7 @@ def addplayer():
 def addum():
     click()
     name=ume1.get()
-    date=ume2.get()
+    date=ume2.entry.get()
     team=ume3.get()
     prize=ume4.get()
     q5=f"insert into schedule values('{name}','{date}','{team}',{prize})"
@@ -1128,7 +1131,7 @@ entryframe5=tb.Frame(f5)
 f5_title=tb.Label(f5, text='Add Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
 f5_title1=tb.Label(f5, text='Input Details')
 ume1=tb.Entry(entryframe5)
-ume2=tb.Entry(entryframe5)
+ume2=tb.DateEntry(entryframe5, dateformat='%Y-%m-%d', bootstyle='primary', firstweekday=0, startdate=date.today())
 ume3=tb.Entry(entryframe5)
 ume4=tb.Entry(entryframe5)
 uml1=tb.Label(entryframe5, text='League')
