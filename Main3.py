@@ -198,6 +198,8 @@ def themeswap():
         dteam2.config(style="danger.TButton")
         meter1.configure(bootstyle='danger')
         meter2.configure(bootstyle='danger')
+        refresh.config(style="danger.Outline.TButton")
+        ume2.configure(bootstyle='danger')
         tag_submit.config(style="danger.TButton")
         up_submit.config(style="danger.TButton")
         s_button.config(style="danger.TButton")
@@ -257,6 +259,8 @@ def themeswap():
         dteam2.config(style="primary.TButton")
         meter1.configure(bootstyle='primary')
         meter2.configure(bootstyle='primary')
+        refresh.config(style="danger.Outline.TButton")
+        ume2.configure(bootstyle='primary')
         tag_submit.config(style="primary.TButton")
         up_submit.config(style="primary.TButton")
         s_button.config(style="primary.TButton")
@@ -311,7 +315,7 @@ def on_focusout(event):
         s_tag.insert(0, 'Enter player tag')
         s_tag.config(foreground='grey')
 
-def on_date_click(event):
+def on_click(event):
     click()
 
 #Account system
@@ -471,10 +475,11 @@ def fmainmenu4():
     M1.tkraise()
 def fmainmenu5():
     click()
-    for entry in [ume1,ume3,ume4]:
+    for entry in [ume1,ume4]:
         entry.delete(0, 'end')
     ume2.entry.delete(0, 'end')
     ume2.entry.insert(0, ume2._startdate.strftime(ume2._dateformat))
+    ume3.set('')
     M1.tkraise()
 def fmainmenu6():
     reset6()
@@ -593,14 +598,18 @@ def addum():
     date=ume2.entry.get()
     team=ume3.get()
     prize=ume4.get()
-    q5=f"insert into schedule values('{name}','{date}','{team}',{prize})"
-    try:
-        cur.execute(q5)
-        success5.pack()
-        root.after(2000, messageclear, success5)
-    except:
-        fail5.pack()
-        root.after(2000, messageclear, fail5)
+    if team=='team1' or team=='team2':
+        q5=f"insert into schedule values('{name}','{date}','{team}',{prize})"
+        try:
+            cur.execute(q5)
+            success5.pack()
+            root.after(2000, messageclear, success5)
+        except:
+            fail5_1.pack()
+            root.after(2000, messageclear, fail5_1)
+    else:
+        fail5_2.pack()
+        root.after(2000, messageclear, fail5_2)
 
 def search():
     click()
@@ -1130,23 +1139,28 @@ submit4.pack()
 mainmenu4.pack(side='bottom')
 
 #f5 items
+teams=['team1', 'team2']
 entryframe5=tb.Frame(f5)
 f5_title=tb.Label(f5, text='Add Upcoming Matches', font=('Times bold', 12), relief='groove', padding=2)
 f5_title1=tb.Label(f5, text='Input Details')
 ume1=tb.Entry(entryframe5)
 ume2=tb.DateEntry(entryframe5, dateformat='%Y-%m-%d', bootstyle='primary', firstweekday=0, startdate=date.today())
 ume2.button.config(command=lambda: [ume2._on_date_ask(), click()])
-ume2.button.bind('<FocusIn>', on_date_click)
-ume3=tb.Entry(entryframe5)
+ume2.button.bind('<FocusIn>', on_click)
+ume3=tb.Combobox(entryframe5, bootstyle='primary', values=teams, state='readonly')
+ume3.bind('<Button-1>', on_click)
 ume4=tb.Entry(entryframe5)
 uml1=tb.Label(entryframe5, text='League')
 uml2=tb.Label(entryframe5, text='Date')
 uml3=tb.Label(entryframe5, text='Participants')
 uml4=tb.Label(entryframe5, text='Price')
 
+
+
 submit5=tb.Button(f5, text='Submit', command=addum)
 success5=tb.Label(f5, text='Added succesfully')
-fail5=tb.Label(f5, text='Unsuccesful')
+fail5_1=tb.Label(f5, text='Unsuccesful')
+fail5_2=tb.Label(f5, text='Select a team')
 mainmenu5=tb.Button(f5, text='Main Menu', command=fmainmenu5)
 
 

@@ -315,3 +315,10 @@
 2023-09-29 11:32:19,101 - Login attempt: User 'TheFallen' - success
 2023-09-29 11:33:01,512 - Login attempt: User 'TheFallen' - success
 2023-09-29 11:35:09,269 - Login attempt: User 'TheFallen' - success
+2023-09-29 11:40:20,537 - Login attempt: User 'MaxExploit' - success
+2023-09-29 12:15:06,015 - Login attempt: User 'TheFallen' - success
+2023-09-29 12:16:14,213 - Login attempt: User 'TheFallen' - success
+2023-09-29 12:17:24,832 - Login attempt: User 'TheFallen' - success
+2023-09-29 12:21:48,333 - Login attempt: User 'TheFallen' - success
+2023-09-29 12:38:31,505 - Login attempt: User 'MaxExploit' - success
+2023-09-29 12:41:12,703 - Login attempt: User 'MaxExploit' - success
