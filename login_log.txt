@@ -170,25 +170,11 @@
 2023-09-28 10:34:39,115 - Login attempt: User 'MaxExploit' - success
 2023-09-28 11:03:14,786 - Login attempt: User 'MaxExploit' - success
 2023-09-28 11:16:05,812 - Login attempt: User 'MaxExploit' - success
-<<<<<<< HEAD
-2023-09-28 12:24:31,688 - Login attempt: User 'MaxExploit' - success
-2023-09-28 12:31:02,240 - Login attempt: User 'TheFallen' - success
-2023-09-28 12:32:03,267 - Login attempt: User 'TheFallen' - success
-2023-09-28 12:54:40,873 - Login attempt: User 'MaxExploit' - success
-2023-09-28 12:59:17,209 - Login attempt: User 'MaxExploit' - success
-2023-09-28 13:00:52,961 - Login attempt: User 'MaxExploit' - success
-2023-09-28 13:01:52,530 - Login attempt: User 'MaxExploit' - success
-2023-09-28 13:06:20,933 - Login attempt: User 'MaxExploit' - success
-2023-09-28 13:13:35,440 - Login attempt: User 'MaxExploit' - success
-2023-09-28 13:13:54,422 - Login attempt: User 'TheFallen' - success
-2023-09-28 13:14:19,879 - Login attempt: User 'MaxExploit' - success
-=======
 2023-09-28 12:45:36,978 - Login attempt: User 'TheFallen' - success
 2023-09-28 12:48:42,936 - Login attempt: User 'TheFallen' - success
 2023-09-28 12:50:36,312 - Login attempt: User 'TheFallen' - success
 2023-09-28 12:57:43,740 - Login attempt: User 'TheFallen' - success
 2023-09-28 12:58:45,211 - Login attempt: User 'TheFallen' - success
->>>>>>> 0173d135024218fe728c98d53b0241031a59383d
 2023-09-28 13:56:50,093 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:02:24,670 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:02:33,319 - Login attempt: User 'TheFallen' - success
@@ -201,44 +187,6 @@
 2023-09-28 14:14:04,599 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:14:23,223 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:15:09,552 - Login attempt: User 'TheFallen' - success
-<<<<<<< HEAD
-2023-09-28 14:53:40,610 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:02:26,132 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:04:27,795 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:05:30,072 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:08:50,007 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:11:45,535 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:14:33,373 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:19:17,794 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:19:57,777 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:23:54,310 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:28:24,670 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:29:34,530 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:31:33,901 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:35:58,159 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:39:32,825 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:40:01,447 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:42:41,652 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:43:14,239 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:43:49,287 - Login attempt: User 'TheFallen' - success
-2023-09-28 15:47:05,731 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:14:28,664 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:16:27,234 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:18:18,880 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:19:14,112 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:20:18,527 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:21:09,130 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:30:36,877 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:33:28,219 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:36:47,196 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:37:28,510 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:38:25,944 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:41:42,499 - Login attempt: User 'TheFallen' - success
-2023-09-28 16:42:01,245 - Login attempt: User 'TheFallen' - success
-2023-09-28 17:04:39,283 - Login attempt: User 'TheFallen' - success
-2023-09-28 17:04:55,864 - Login attempt: User 'TheFallen' - success
-2023-09-28 17:07:47,715 - Login attempt: User 'TheFallen' - success
-=======
 2023-09-28 14:24:38,753 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:27:32,338 - Login attempt: User 'TheFallen' - success
 2023-09-28 14:29:23,593 - Login attempt: User 'TheFallen' - success
@@ -247,7 +195,6 @@
 2023-09-28 15:47:33,408 - Login attempt: User 'TheFallen' - success
 2023-09-28 15:48:54,128 - Login attempt: User 'TheFallen' - success
 2023-09-28 15:49:13,231 - Login attempt: User 'TheFallen' - success
->>>>>>> 2088af7b31a40e977fc065f7fd01a60770a706cb
 2023-09-28 19:19:04,704 - Login attempt: User 'TheFallen' - success
 2023-09-28 19:19:57,658 - Login attempt: User 'TheFallen' - success
 2023-09-28 20:07:50,783 - Login attempt: User 'TheFallen' - success
@@ -407,3 +354,4 @@
 2023-09-30 02:35:46,326 - Login attempt: User 'TheFallen' - success
 2023-09-30 14:41:14,615 - Login attempt: User 'TheFallen' - success
 2023-09-30 14:41:51,008 - Login attempt: User 'TheFallen' - success
+2023-09-30 16:24:31,330 - Login attempt: User 'TheFallen' - success
