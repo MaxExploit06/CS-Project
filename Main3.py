@@ -319,6 +319,10 @@ def themeswap():
 
 def logout():
     click()
+    Aus2.delete(0, END)
+    Apw2.delete(0, END)
+    Pus2.delete(0, END)
+    Ppw2.delete(0, END)
     L1.tkraise()
     L1_1.tkraise()
 
