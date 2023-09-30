@@ -172,14 +172,37 @@ def GIF2_light():
     # Create a Canvas widget to display the GIF background
     canvas = tb.Canvas(LP1, width=800, height=600)
     LP1.grid_rowconfigure(0, weight=1)
-    LP1.grid_columnconfigure(0, weight=1)
+    LP1.grid_colulogoutmnconfigure(0, weight=1)
     canvas.grid(row=0,column=0, sticky="nsew")
     # Create a background image on the Canvas
     bg_img = canvas.create_image(0, 0, anchor=tb.NW, image=frames[0])
     # Start the animation loop
     update_gif2(canvas, frames, 0)
 
-    
+def update_login_gif(label, label2, label3, label4, img, frame_index):
+    label.config(image=img[frame_index])
+    label.photo_ref = img[frame_index]
+    label2.config(image=img[frame_index])
+    label2.photo_ref = img[frame_index]
+    label3.config(image=img[frame_index])
+    label3.photo_ref = img[frame_index]
+    label4.config(image=img[frame_index])
+    label4.photo_ref = img[frame_index]
+    root.after(40, update_login_gif, label, label2, label3, label4, img, (frame_index + 1) % len(img))
+
+def login_gif():
+    gif_path = os.getcwd()+"\\Graphics\\logif.gif"
+    gif = Image.open(gif_path)
+    frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
+    L1_bg.config(image=frames[0])
+    L1_bg.photo_ref = frames[0]
+    L1_1_bg.config(image=frames[0])
+    L1_1_bg.photo_ref = frames[0]
+    LA_bg.config(image=frames[0])
+    LA_bg.photo_ref = frames[0]
+    LP_bg.config(image=frames[0])
+    LP_bg.photo_ref = frames[0]
+    update_login_gif(L1_bg, L1_1_bg, LA_bg, LP_bg, frames, 0)  
 
 t1=1 ; t2=1
 
@@ -920,8 +943,8 @@ f9=tb.Frame(root)
 
 #L1 items
 L1_1=tb.Frame(L1)
-L1_bg= Label(L1,image=wp1)
-L1_1_bg= Label(L1_1,image=wp1)
+L1_bg= Label(L1)
+L1_1_bg= Label(L1_1)
 L1_title=tb.Label(L1, text='ESPORTS MANAGEMENT SYSTEM', font=f_helvetica, relief='groove', padding=5)
 L1_title1=tb.Label(L1, text=' SELECT LOGIN TYPE ', font=f_georgia,relief='raised')
 L1_title2_1=tb.Label(L1, text=' ADMIN ', font=f_trebuchet,relief='raised')
@@ -929,8 +952,8 @@ L1_title2_2=tb.Label(L1, text=' PLAYER ', font=f_trebuchet,relief='raised')
 b_admin=tb.Button(L1_1, bootstyle='outline', image=admin, command=admin_login_swap)
 b_player=tb.Button(L1_1, bootstyle='outline', image=player, command=player_login_swap)
 
-L1_bg.place(x=0,y=0)
-L1_1_bg.place(x=-180,y=-123)
+L1_bg.place(x=-2,y=-2)
+L1_1_bg.place(x=-218,y=-179)
 L1_title.pack(pady=20)
 L1_title1.pack(pady=(20,20))
 L1_1.pack(pady=20)
@@ -940,6 +963,7 @@ L1_title2_1.pack(side='left',padx=(290,0))
 L1_title2_2.pack(side="right",padx=(0,285))
 
 #LA items
+LA_bg=Label(LA)
 LA_1=tb.Frame(LA)
 LA_2=tb.Frame(LA)
 LA_title=tb.Label(LA, text='ADMIN LOGIN', font=f_georgia, padding=5)
@@ -952,6 +976,7 @@ Apw2=tb.Entry(LA_2, show='*', width=14)
 Aeye=tb.Button(LA_2, image=see, command=a_eye_toggle)
 submit1=tb.Button(LA, text='Submit', command=admin_login)
 
+LA_bg.place(x=-2,y=-2)
 Aus1.pack(side='left')
 Aus2.pack(side='left')
 Apw1.pack(side='left')
@@ -971,7 +996,7 @@ load1=tb.Label(LA1)
 #LP items
 LP_1=tb.Frame(LP)
 LP_2=tb.Frame(LP)
-LP_bg=tb.Label(LP,image=wp1)
+LP_bg=Label(LP)
 LP_title=tb.Label(LP, text='PLAYER LOGIN',font=f_georgia, padding=5)
 LP_title1=tb.Label(LP, text='Enter Username and Password',font=f_trebuchet)
 LP_back=tb.Button(LP, text='Back', command=logout)
@@ -982,7 +1007,7 @@ Ppw2=tb.Entry(LP_2, show='*', width=13)
 Peye=tb.Button(LP_2, image=see, command=p_eye_toggle)
 submit2=tb.Button(LP, text='Submit', command=player_login)
 
-LP_bg.place(x=0,y=0)
+LP_bg.place(x=-2,y=-2)
 Pus1.pack(side='left')
 Pus2.pack(side='left')
 Ppw1.pack(side='left')
@@ -1422,4 +1447,5 @@ for frame in frames:
 
 L1.tkraise()
 L1_1.tkraise()
+login_gif()
 root.mainloop()
