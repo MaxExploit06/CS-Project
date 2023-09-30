@@ -15,7 +15,7 @@ from tkinter.font import Font
 #check
 
 #MySQL connection
-mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 
@@ -269,7 +269,7 @@ def themeswap():
         dteam2.config(style="primary.TButton")
         meter1.configure(bootstyle='primary')
         meter2.configure(bootstyle='primary')
-        refresh.config(style="danger.Outline.TButton")
+        refresh.config(style="primary.Outline.TButton")
         ume2.configure(bootstyle='primary')
         tag_submit.config(style="primary.TButton")
         up_submit.config(style="primary.TButton")
@@ -795,7 +795,7 @@ def submit8_2():
             cur.execute(q_8)
         elif col == "Tag":
             q_8 = f"Update information set {col} = {up} where tag = {row}"
-            q_8_1 = f"Update information set password = {up} where tag = {row}"
+            q_8_1 = f"Update information set password = {up} where tag = {up}"
             cur.execute(q_8)
             cur.execute(q_8_1)
         up_entry.config(state='disabled')
