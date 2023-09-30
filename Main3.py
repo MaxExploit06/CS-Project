@@ -3,7 +3,7 @@ from tkinter import *
 import ttkbootstrap as tb
 from ttkbootstrap.tableview import Tableview
 from ttkbootstrap.constants import *
-from PIL import Image, ImageTk, ImageSequence
+from PIL import Image, ImageTk, ImageSequence, ImageOps
 import hashlib
 import logging
 import os
@@ -23,7 +23,7 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
+root.iconbitmap(os.getcwd()+"\\Graphics\\EMS.ico")
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
@@ -32,31 +32,59 @@ colors=root.style.colors
 pygame.mixer.init()
 
 def click():
-    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\click.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\click.mp3")
     pygame.mixer.music.play(loops=0)
 
 #Images
-admin1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\admin.png")
-player1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\player.png")
+admin1=Image.open(os.getcwd()+"\\Graphics\\admin.png")
+player1=Image.open(os.getcwd()+"\\Graphics\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\see.png")
-hide1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\hide.png")
+#___Invertion of Admin and Player Images
+r,g,b,a = resized_admin.split()
+r1,g1,b1,a1 = resized_player.split()
+rgb_image_A = Image.merge('RGB', (r,g,b))
+rgb_image_P = Image.merge('RGB', (r1,g1,b1))
+inv_ad = ImageOps.invert(rgb_image_A)
+inv_pl = ImageOps.invert(rgb_image_P)
+r2,g2,b2 = inv_ad.split()
+r3,g3,b3 = inv_pl.split()
+#___
+
+inverted_admin = Image.merge('RGBA', (r2,g2,b2,a))
+inverted_player = Image.merge('RGBA',(r3,g3,b3,a1))
+admin_black=ImageTk.PhotoImage(inverted_admin)
+player_black=ImageTk.PhotoImage(inverted_player)
+
+see1=Image.open(os.getcwd()+"\\Graphics\\see.png")
+hide1=Image.open(os.getcwd()+"\\Graphics\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 see=ImageTk.PhotoImage(resized_see)
 hide=ImageTk.PhotoImage(resized_hide)
 
-search1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search.png")
+search1=Image.open(os.getcwd()+"\\Graphics\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
 
-send1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send.png")
+send1=Image.open(os.getcwd()+"\\Graphics\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
+
+wpDark=Image.open(os.getcwd()+"\\Graphics\\wp_Dark.jpg")
+resized_wpDark=wpDark.resize((960,540))
+wp1= ImageTk.PhotoImage(resized_wpDark)
+
+wpLight=Image.open(os.getcwd()+"\\Graphics\\wp_Light.jpg")
+resized_wpLight=wpLight.resize((960,540))
+wp2= ImageTk.PhotoImage(resized_wpLight)
+
+transparent=Image.new("RGBA",(200,50),(0,0,0,0))
+trans=ImageTk.PhotoImage(transparent)
+
 
 #Font
 f_helvetica = Font(family="Helvetica",size=20,weight="bold",slant="italic",underline=0,overstrike=0)
@@ -87,7 +115,7 @@ def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -104,7 +132,7 @@ def GIF1_light():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -121,7 +149,7 @@ def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -138,7 +166,7 @@ def GIF2_light():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -158,10 +186,13 @@ t1=1 ; t2=1
 #other definitions
 def themeswap():
     global t, gif_path
-    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\toggle.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\toggle.mp3")
     pygame.mixer.music.play(loops=0)
     if t==0:
         tb.Style(theme="cosmo")
+        L1_bg.config(image=wp2)
+        L1_1_bg.config(image=wp2)
+        LP_bg.config(image=wp2)
         themebutton1.config(bootstyle='dark, outline')
         themebutton2.config(bootstyle='dark, outline')
         b1.config(style="danger.Outline.TButton")
@@ -177,8 +208,8 @@ def themeswap():
         b6_2_1.config(style="danger.TButton")
         b6_2.config(style="danger.TButton")
         b6_2_2.config(style="danger.TButton")
-        b_admin.config(style="danger.TButton")
-        b_player.config(style="danger.TButton")
+        b_admin.config(style="danger.Outline.TButton",image=admin_black)
+        b_player.config(style="danger.Outline.TButton",image=player_black)
         b_reset6.config(style="danger.Outline.TButton")
         b_reset8.config(style="danger.Outline.TButton")
         submit1.config(style="danger.TButton")
@@ -223,6 +254,9 @@ def themeswap():
         t=1
     elif t==1:
         tb.Style(theme="cyborg")
+        L1_bg.config(image=wp1)
+        L1_1_bg.config(image=wp1)
+        LP_bg.config(image=wp1)
         themebutton1.config(bootstyle='light, outline')
         themebutton2.config(bootstyle='light, outline')
         b1.config(style="primary.Outline.TButton")
@@ -238,8 +272,8 @@ def themeswap():
         b6_2_1.config(style="primary.TButton")
         b6_2.config(style="primary.TButton")
         b6_2_2.config(style="primary.TButton")
-        b_admin.config(style="primary.TButton")
-        b_player.config(style="primary.TButton")
+        b_admin.config(style="primary.Outline.TButton",image=admin)
+        b_player.config(style="primary.Outline.TButton",image=player)
         b_reset6.config(style="primary.Outline.TButton")
         b_reset8.config(style="primary.Outline.TButton")
         submit1.config(style="primary.TButton")
@@ -286,6 +320,7 @@ def themeswap():
 def logout():
     click()
     L1.tkraise()
+    L1_1.tkraise()
 
 def a_eye_toggle():
     click()
@@ -330,7 +365,7 @@ def on_click(event):
 
 #Account system
 
-logging.basicConfig(filename=os.getcwd()+"\\CS-Project\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+"\\ login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -344,7 +379,7 @@ def hash_password(password):
         file.write(f"{username}:{hash_password(password)}\n")'''
 
 def login(username, password):
-    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'r') as file:
+    with open(os.getcwd()+"\\user_accounts.txt", 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
@@ -434,6 +469,8 @@ def admin_login_swap():
 def player_login_swap():
     click()
     LP.tkraise()
+    LP_1.tkraise()
+    LP_2.tkraise()
 
 def f1_swap():
     click()
@@ -879,19 +916,24 @@ f9=tb.Frame(root)
 
 #L1 items
 L1_1=tb.Frame(L1)
+L1_bg= Label(L1,image=wp1)
+L1_1_bg= Label(L1_1,image=wp1)
 L1_title=tb.Label(L1, text='ESPORTS MANAGEMENT SYSTEM', font=f_helvetica, relief='groove', padding=5)
-L1_title1=tb.Label(L1, text='SELECT LOGIN TYPE', font=f_georgia)
-L1_title2=tb.Label(L1, text='  ADMIN                                       PLAYER', font=f_trebuchet)
-b_admin=tb.Button(L1_1, text='ADMIN', image=admin, command=admin_login_swap)
-b_player=tb.Button(L1_1, text='PLAYER', image=player, command=player_login_swap)
+L1_title1=tb.Label(L1, text=' SELECT LOGIN TYPE ', font=f_georgia,relief='raised')
+L1_title2_1=tb.Label(L1, text=' ADMIN ', font=f_trebuchet,relief='raised')
+L1_title2_2=tb.Label(L1, text=' PLAYER ', font=f_trebuchet,relief='raised')
+b_admin=tb.Button(L1_1, bootstyle='outline', image=admin, command=admin_login_swap)
+b_player=tb.Button(L1_1, bootstyle='outline', image=player, command=player_login_swap)
 
-
+L1_bg.place(x=0,y=0)
+L1_1_bg.place(x=-180,y=-123)
 L1_title.pack(pady=20)
 L1_title1.pack(pady=(20,20))
 L1_1.pack(pady=20)
-b_admin.pack(side='left', padx=40 )
-b_player.pack(side='left', padx=40)
-L1_title2.pack()
+b_admin.pack(side='left', padx=(0,40) )
+b_player.pack(side='left', padx=(40,0))
+L1_title2_1.pack(side='left',padx=(290,0))
+L1_title2_2.pack(side="right",padx=(0,285))
 
 #LA items
 LA_1=tb.Frame(LA)
@@ -925,6 +967,7 @@ load1=tb.Label(LA1)
 #LP items
 LP_1=tb.Frame(LP)
 LP_2=tb.Frame(LP)
+LP_bg=tb.Label(LP,image=wp1)
 LP_title=tb.Label(LP, text='PLAYER LOGIN',font=f_georgia, padding=5)
 LP_title1=tb.Label(LP, text='Enter Username and Password',font=f_trebuchet)
 LP_back=tb.Button(LP, text='Back', command=logout)
@@ -935,6 +978,7 @@ Ppw2=tb.Entry(LP_2, show='*')
 Peye=tb.Button(LP_2, image=see, command=p_eye_toggle)
 submit2=tb.Button(LP, text='Submit', command=player_login)
 
+LP_bg.place(x=0,y=0)
 Pus1.pack(side='left')
 Pus2.pack(side='left')
 Ppw1.pack(side='left')
@@ -1372,4 +1416,5 @@ for frame in frames:
     frame.grid(row=0, column=0, sticky="nsew")
 
 L1.tkraise()
+L1_1.tkraise()
 root.mainloop()

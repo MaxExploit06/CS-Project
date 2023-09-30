@@ -1,0 +1,27 @@
+import tkinter as tk
+from tkinter import ttk
+from PIL import ImageTk, Image
+import os
+
+# Create the main window
+root = tk.Tk()
+root.title("Label with Background")
+
+wpDark=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Dark.jpg")
+resized_wpDark=wpDark.resize((960,540))
+wp1= ImageTk.PhotoImage(resized_wpDark)
+
+# Create a style for the label
+style = ttk.Style()
+style.configure("Custom.TLabel", background="red")
+
+# Create a frame to contain the label with a custom background
+frame = tk.Frame(root, bg="red")
+frame.pack(fill=tk.BOTH, expand=True)
+
+# Create the label with an empty text and the custom style
+label = ttk.Label(frame, text="bruhh", style="Custom.TLabel")
+label.pack(pady=50,fill=tk.BOTH, expand=True)
+
+# Start the Tkinter main loop
+root.mainloop()
