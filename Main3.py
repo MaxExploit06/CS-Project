@@ -127,6 +127,7 @@ def update_gif2(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
     if frame_index==56:
         MP.tkraise()
+        outputframe.tkraise()
         display()
     else:
         root.after(30, update_gif2, canvas, img, (frame_index + 1) % len(img))
@@ -238,6 +239,7 @@ def themeswap():
         sty.configure("info.Outline.TButton",background="black")
         sty.configure("info.TEntry", fieldbackground='black', foreground='white')
 
+        MP_bg.config(image=wp2)
         themebutton1.config(bootstyle='dark, outline')
         themebutton2.config(bootstyle='dark, outline')
         b1.config(style="danger.Outline.TButton")
@@ -290,10 +292,6 @@ def themeswap():
         tag_submit9.config(style="danger.Outline.TButton", image=isend)
 
         table2.configure(bootstyle='danger')
-        Aus2.config(style="danger.TEntry")
-        Apw2.config(style="danger.TEntry")
-        Pus2.config(style="danger.TEntry")
-        Ppw2.config(style="danger.TEntry")
         pe1.config(style="danger.TEntry")
         pe2.config(style="danger.TEntry")
         pe3.config(style="danger.TEntry")
@@ -318,6 +316,7 @@ def themeswap():
         sty.configure("info.Outline.TButton",background="black")
         sty.configure("info.TEntry", fieldbackground='black', foreground='white')
 
+        MP_bg.config(image= wp1)
         themebutton1.config(bootstyle='light, outline')
         themebutton2.config(bootstyle='light, outline')
         b1.config(style="info.Outline.TButton")
@@ -370,10 +369,6 @@ def themeswap():
         tag_submit9.config(style="info.Outline.TButton", image=isend_white)
         
         table2.configure(bootstyle='info')
-        Aus2.config(style="info.TEntry")
-        Apw2.config(style="info.TEntry")
-        Pus2.config(style="info.TEntry")
-        Ppw2.config(style="info.TEntry")
         pe1.config(style="info.TEntry")
         pe2.config(style="info.TEntry")
         pe3.config(style="info.TEntry")
@@ -1077,6 +1072,7 @@ LP_back.pack()
 load2=tb.Label(LP1)
 
 #MP items
+MP_bg=tb.Label(MP,image=wp1)
 MP_title=tb.Label(MP, text= 'Welcome')
 outputframe=tb.Frame(MP)
 
@@ -1113,6 +1109,7 @@ MP_opl5.grid(row= 4, column= 0)
 MP_opl6.grid(row= 5, column= 0)
 MP_opl7.grid(row= 6, column= 0)
 
+MP_bg.place(x=0,y=0)
 MP_title.pack()
 outputframe.pack()
 MP_logout.pack(side='left',anchor='sw', padx=5, pady=5)
