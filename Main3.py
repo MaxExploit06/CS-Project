@@ -23,7 +23,7 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
+root.iconbitmap(os.getcwd()+"\\Graphics\\EMS.ico")
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
@@ -32,33 +32,33 @@ colors=root.style.colors
 pygame.mixer.init()
 
 def click():
-    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\click.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\click.mp3")
     pygame.mixer.music.play(loops=0)
 
 #Images
-admin1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\admin.png")
-player1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\player.png")
+admin1=Image.open(os.getcwd()+"\\Graphics\\admin.png")
+player1=Image.open(os.getcwd()+"\\Graphics\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\see.png")
-hide1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\hide.png")
+see1=Image.open(os.getcwd()+"\\Graphics\\see.png")
+hide1=Image.open(os.getcwd()+"\\Graphics\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 
-search1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search.png")
+search1=Image.open(os.getcwd()+"\\Graphics\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
-search2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search_w.png")
+search2=Image.open(os.getcwd()+"\\Graphics\\search_w.png")
 resized_search2 = search2.resize((16, 16))
 isearch_white=ImageTk.PhotoImage(resized_search2)
 
-send1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send.png")
+send1=Image.open(os.getcwd()+"\\Graphics\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
-send2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send_w.png")
+send2=Image.open(os.getcwd()+"\\Graphics\\send_w.png")
 resized_send2 = send2.resize((16, 16))
 isend_white=ImageTk.PhotoImage(resized_send2)
 
@@ -91,11 +91,11 @@ inverted_hide= Image.merge('RGBA', (R3,G3,B3,a3))
 see= ImageTk.PhotoImage(inverted_see)
 hide= ImageTk.PhotoImage(inverted_hide)
 
-wpDark=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Dark.jpg")
+wpDark=Image.open(os.getcwd()+"\\Graphics\\wp_Dark.jpg")
 resized_wpDark=wpDark.resize((960,540))
 wp1= ImageTk.PhotoImage(resized_wpDark)
 
-wpLight=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Light.jpg")
+wpLight=Image.open(os.getcwd()+"\\Graphics\\wp_Light.jpg")
 resized_wpLight=wpLight.resize((960,540))
 wp2= ImageTk.PhotoImage(resized_wpLight)
 
@@ -136,7 +136,7 @@ def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -153,7 +153,7 @@ def GIF1_light():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -170,7 +170,7 @@ def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -187,7 +187,7 @@ def GIF2_light():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -212,7 +212,7 @@ def update_login_gif(label, label2, label3, label4, img, frame_index):
     root.after(40, update_login_gif, label, label2, label3, label4, img, (frame_index + 1) % len(img))
 
 def login_gif():
-    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\logif.gif"
+    gif_path = os.getcwd()+"\\Graphics\\logif.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     L1_bg.config(image=frames[0])
@@ -230,7 +230,7 @@ t1=1 ; t2=1
 #other definitions
 def themeswap():
     global t, gif_path
-    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\toggle.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\toggle.mp3")
     pygame.mixer.music.play(loops=0)
     if t==0:
         sty=tb.Style(theme="cosmo")
@@ -445,7 +445,7 @@ def on_click(event):
 
 #Account system
 
-logging.basicConfig(filename=os.getcwd()+"\\CS-Project\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+"\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -459,7 +459,7 @@ def hash_password(password):
         file.write(f"{username}:{hash_password(password)}\n")'''
 
 def login(username, password):
-    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'r') as file:
+    with open(os.getcwd()+"\\user_accounts.txt", 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
