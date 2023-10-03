@@ -23,7 +23,7 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap(os.getcwd()+"\\Graphics\\EMS.ico")
+root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
@@ -32,33 +32,33 @@ colors=root.style.colors
 pygame.mixer.init()
 
 def click():
-    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\click.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\click.mp3")
     pygame.mixer.music.play(loops=0)
 
 #Images
-admin1=Image.open(os.getcwd()+"\\Graphics\\admin.png")
-player1=Image.open(os.getcwd()+"\\Graphics\\player.png")
+admin1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\admin.png")
+player1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open(os.getcwd()+"\\Graphics\\see.png")
-hide1=Image.open(os.getcwd()+"\\Graphics\\hide.png")
+see1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\see.png")
+hide1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 
-search1=Image.open(os.getcwd()+"\\Graphics\\search.png")
+search1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
-search2=Image.open(os.getcwd()+"\\Graphics\\search_w.png")
+search2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search_w.png")
 resized_search2 = search2.resize((16, 16))
 isearch_white=ImageTk.PhotoImage(resized_search2)
 
-send1=Image.open(os.getcwd()+"\\Graphics\\send.png")
+send1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
-send2=Image.open(os.getcwd()+"\\Graphics\\send_w.png")
+send2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send_w.png")
 resized_send2 = send2.resize((16, 16))
 isend_white=ImageTk.PhotoImage(resized_send2)
 
@@ -91,11 +91,11 @@ inverted_hide= Image.merge('RGBA', (R3,G3,B3,a3))
 see= ImageTk.PhotoImage(inverted_see)
 hide= ImageTk.PhotoImage(inverted_hide)
 
-wpDark=Image.open(os.getcwd()+"\\Graphics\\wp_Dark.jpg")
+wpDark=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Dark.jpg")
 resized_wpDark=wpDark.resize((960,540))
 wp1= ImageTk.PhotoImage(resized_wpDark)
 
-wpLight=Image.open(os.getcwd()+"\\Graphics\\wp_Light.jpg")
+wpLight=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Light.jpg")
 resized_wpLight=wpLight.resize((960,540))
 wp2= ImageTk.PhotoImage(resized_wpLight)
 
@@ -137,7 +137,7 @@ def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -154,7 +154,7 @@ def GIF1_light():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -171,7 +171,7 @@ def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -188,7 +188,7 @@ def GIF2_light():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -213,7 +213,7 @@ def update_login_gif(label, label2, label3, label4, img, frame_index):
     root.after(40, update_login_gif, label, label2, label3, label4, img, (frame_index + 1) % len(img))
 
 def login_gif():
-    gif_path = os.getcwd()+"\\Graphics\\logif.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\logif.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     L1_bg.config(image=frames[0])
@@ -231,8 +231,15 @@ t1=1 ; t2=1
 #other definitions
 def themeswap():
     global t, gif_path
-    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\toggle.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\toggle.mp3")
     pygame.mixer.music.play(loops=0)
+
+    b_list= [b1,b2,b3,b4,b5,b6,b7,b8,b9,b6_1,b6_2,b6_2_1,b6_2_2,b_reset6,b_reset8,submit4,submit5,submit6_1,submit6_1a,
+             team1,team2,mainmenu1,mainmenu2,mainmenu3,mainmenu4,mainmenu5,mainmenu6,mainmenu7,mainmenu8,mainmenu9,
+             dteam1,dteam2,refresh,c_1,c_2,c_3,c_4,c_5,c_6]
+
+    e_list= [pe1,pe2,pe3,pe4,pe5,pe6,pe7,ume1,ume4,e6_1,e6_2,e6_1a,e6_2a,s_tag,tag_entry,up_entry,tag_entry9]
+
     if t==0:
         sty=tb.Style(theme="cosmo")
         sty.configure("info.TLabel",background="black")
@@ -242,73 +249,21 @@ def themeswap():
         MP_bg.config(image=wp2)
         themebutton1.config(bootstyle='dark, outline')
         themebutton2.config(bootstyle='dark, outline')
-        b1.config(style="danger.Outline.TButton")
-        b2.config(style="danger.Outline.TButton")
-        b3.config(style="danger.Outline.TButton")
-        b4.config(style="danger.Outline.TButton")
-        b5.config(style="danger.Outline.TButton")
-        b6.config(style="danger.Outline.TButton")
-        b7.config(style="danger.Outline.TButton")
-        b8.config(style="danger.Outline.TButton")
-        b9.config(style="danger.Outline.TButton")
-        b6_1.config(style="danger.Outline.TButton")
-        b6_2_1.config(style="danger.Outline.TButton")
-        b6_2.config(style="danger.Outline.TButton")
-        b6_2_2.config(style="danger.Outline.TButton")
-        b_reset6.config(style="danger.Outline.TButton")
-        b_reset8.config(style="danger.Outline.TButton")
-        submit4.config(style="danger.Outline.TButton")
-        submit5.config(style="danger.Outline.TButton")
-        submit6_1.config(style="danger.Outline.TButton")
-        submit6_1a.config(style="danger.Outline.TButton")
-        MP_logout.config(style="danger.Outline.TButton")
-        M1_logout.config(style="danger.Outline.TButton")
-        team1.config(style="danger.Outline.TButton")
-        team2.config(style="danger.Outline.TButton")
-        mainmenu1.config(style="danger.Outline.TButton")
-        mainmenu2.config(style="danger.Outline.TButton")
-        mainmenu3.config(style="danger.Outline.TButton")
-        mainmenu4.config(style="danger.Outline.TButton")
-        mainmenu5.config(style="danger.Outline.TButton")
-        mainmenu6.config(style="danger.Outline.TButton")
-        mainmenu7.config(style="danger.Outline.TButton")
-        mainmenu8.config(style="danger.Outline.TButton")
-        mainmenu9.config(style="danger.Outline.TButton")
-        dteam1.config(style="danger.Outline.TButton")
-        dteam2.config(style="danger.Outline.TButton")
+         
+        for i in b_list:
+            i.config(style="danger.Outline.TButton")
+        for j in e_list:
+            j.config(style="danger.TEntry")
+
         meter1.configure(bootstyle='danger')
         meter2.configure(bootstyle='danger')
-        refresh.config(style="danger.Outline.TButton")
         ume2.configure(bootstyle='danger')
         tag_submit.config(style="danger.Outline.TButton", image=isend)
         up_submit.config(style="danger.Outline.TButton", image=isend)
         s_button.config(style="danger.Outline.TButton", image=isearch)
-        c_1.config(style="danger.Outline.TButton")
-        c_2.config(style="danger.Outline.TButton")
-        c_3.config(style="danger.Outline.TButton")
-        c_4.config(style="danger.Outline.TButton")
-        c_5.config(style="danger.Outline.TButton")
-        c_6.config(style="danger.Outline.TButton")
         tag_submit9.config(style="danger.Outline.TButton", image=isend)
-
         table2.configure(bootstyle='danger')
-        pe1.config(style="danger.TEntry")
-        pe2.config(style="danger.TEntry")
-        pe3.config(style="danger.TEntry")
-        pe4.config(style="danger.TEntry")
-        pe5.config(style="danger.TEntry")
-        pe6.config(style="danger.TEntry")
-        pe7.config(style="danger.TEntry")
-        ume1.config(style="danger.TEntry")
-        ume4.config(style="danger.TEntry")
-        e6_1.config(style="danger.TEntry")
-        e6_2.config(style="danger.TEntry")
-        e6_1a.config(style="danger.TEntry")
-        e6_2a.config(style="danger.TEntry")
-        s_tag.config(style="danger.TEntry")
-        tag_entry.config(style="danger.TEntry")
-        up_entry.config(style="danger.TEntry")
-        tag_entry9.config(style="danger.TEntry")
+        ume3.configure(bootstyle='danger')
         t=1
     elif t==1:
         sty=tb.Style(theme="cyborg")
@@ -319,73 +274,21 @@ def themeswap():
         MP_bg.config(image= wp1)
         themebutton1.config(bootstyle='light, outline')
         themebutton2.config(bootstyle='light, outline')
-        b1.config(style="info.Outline.TButton")
-        b2.config(style="info.Outline.TButton")
-        b3.config(style="info.Outline.TButton")
-        b4.config(style="info.Outline.TButton")
-        b5.config(style="info.Outline.TButton")
-        b6.config(style="info.Outline.TButton")
-        b7.config(style="info.Outline.TButton")
-        b8.config(style="info.Outline.TButton")
-        b9.config(style="info.Outline.TButton")
-        b6_1.config(style="info.Outline.TButton")
-        b6_2_1.config(style="info.Outline.TButton")
-        b6_2.config(style="info.Outline.TButton")
-        b6_2_2.config(style="info.Outline.TButton")
-        b_reset6.config(style="info.Outline.TButton")
-        b_reset8.config(style="info.Outline.TButton")
-        submit4.config(style="info.Outline.TButton")
-        submit5.config(style="info.Outline.TButton")
-        submit6_1.config(style="info.Outline.TButton")
-        submit6_1a.config(style="info.Outline.TButton")
-        MP_logout.config(style="danger.Outline.TButton")
-        M1_logout.config(style="danger.Outline.TButton")
-        team1.config(style="info.Outline.TButton")
-        team2.config(style="info.Outline.TButton")
-        mainmenu1.config(style="info.Outline.TButton")
-        mainmenu2.config(style="info.Outline.TButton")
-        mainmenu3.config(style="info.Outline.TButton")
-        mainmenu4.config(style="info.Outline.TButton")
-        mainmenu5.config(style="info.Outline.TButton")
-        mainmenu6.config(style="info.Outline.TButton")
-        mainmenu7.config(style="info.Outline.TButton")
-        mainmenu8.config(style="info.Outline.TButton")
-        mainmenu9.config(style="info.Outline.TButton")
-        dteam1.config(style="info.Outline.TButton")
-        dteam2.config(style="info.Outline.TButton")
+
+        for i in b_list:
+            i.config(style="info.Outline.TButton")
+        for j in e_list:
+            j.config(style="danger.TEntry")
+
         meter1.configure(bootstyle='info')
         meter2.configure(bootstyle='info')
-        refresh.config(style="info.Outline.TButton")
         ume2.configure(bootstyle='info')
         tag_submit.config(style="info.Outline.TButton", image=isend_white)
         up_submit.config(style="info.Outline.TButton", image=isend_white)
         s_button.config(style="info.Outline.TButton", image=isearch_white)
-        c_1.config(style="info.Outline.TButton")
-        c_2.config(style="info.Outline.TButton")
-        c_3.config(style="info.Outline.TButton")
-        c_4.config(style="info.Outline.TButton")
-        c_5.config(style="info.Outline.TButton")
-        c_6.config(style="info.Outline.TButton")
         tag_submit9.config(style="info.Outline.TButton", image=isend_white)
-        
         table2.configure(bootstyle='info')
-        pe1.config(style="info.TEntry")
-        pe2.config(style="info.TEntry")
-        pe3.config(style="info.TEntry")
-        pe4.config(style="info.TEntry")
-        pe5.config(style="info.TEntry")
-        pe6.config(style="info.TEntry")
-        pe7.config(style="info.TEntry")
-        ume1.config(style="info.TEntry")
-        ume4.config(style="info.TEntry")
-        e6_1.config(style="info.TEntry")
-        e6_2.config(style="info.TEntry")
-        e6_1a.config(style="info.TEntry")
-        e6_2a.config(style="info.TEntry")
-        s_tag.config(style="info.TEntry")
-        tag_entry.config(style="info.TEntry")
-        up_entry.config(style="info.TEntry")
-        tag_entry9.config(style="info.TEntry")
+        ume3.configure(bootstyle='info')
         t=0
 
 def logout():
@@ -440,7 +343,7 @@ def on_click(event):
 
 #Account system
 
-logging.basicConfig(filename=os.getcwd()+"\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+"\\CS-Project\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -454,7 +357,7 @@ def hash_password(password):
         file.write(f"{username}:{hash_password(password)}\n")'''
 
 def login(username, password):
-    with open(os.getcwd()+"\\user_accounts.txt", 'r') as file:
+    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
@@ -635,7 +538,7 @@ def um(team):
     cur.execute(q_1)
     records = cur.fetchall()
     for row in records:
-        um_content+=f'League: {row[0]} \n Date: {row[1]} \n Participant: {row[2]} \n Price: {row[3]} $ \n\n'
+        um_content+=f'League: {row[0]} \n Date: {row[1]} \n Participant: {row[2]} \n Prize: {row[3]} $ \n\n'
     area.delete("1.0", END)
     area.insert("1.0", um_content)
     area.config(state='disable')
@@ -1287,7 +1190,7 @@ ume4=tb.Entry(entryframe5, style="info.TEntry")
 uml1=tb.Label(entryframe5, text='League',font=f_trebuchet)
 uml2=tb.Label(entryframe5, text='Date',font=f_trebuchet)
 uml3=tb.Label(entryframe5, text='Participants',font=f_trebuchet)
-uml4=tb.Label(entryframe5, text='Price',font=f_trebuchet)
+uml4=tb.Label(entryframe5, text='Prize',font=f_trebuchet)
 
 
 
