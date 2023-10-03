@@ -41,7 +41,7 @@ CREATE TABLE `information` (
 
 LOCK TABLES `information` WRITE;
 /*!40000 ALTER TABLE `information` DISABLE KEYS */;
-INSERT INTO `information` VALUES (1052,'Thanos','Sidekick',90,'Marson','SEA',6,1052),(1111,'Faker','Slayer',100,'Jin Woo','KR',1,1111),(3607,'Pain','Survivor',92,'Aamil','JP',3,3607),(5256,'Risen','Riviver',86,'Lance','JP',10,5256),(5562,'Fowl','Marksman',96,'Brian','KR',4,5562),(6982,'Max','Airstriker',96,'Paul','JP',2,6982),(7488,'Fallen','Slayer',99,'Aiden','EU',1,7488),(8008,'Pheonix','Reviver',69,'Rachael','EU',13,8008);
+INSERT INTO `information` VALUES (1052,'Thanos','Sidekick',90,'Marson','SEA',6,1052),(1111,'Faker','Slayer',100,'Jin Woo','KR',1,1111),(3607,'Pain','Survivor',92,'Aamil','JP',3,3607),(4711,'Venerable','Marauder',71,'Albenus','CN',8,4711),(5256,'Risen','Riviver',86,'Lance','JP',10,5256),(5562,'Fowl','Marksman',96,'Brian','KR',4,5562),(6009,'Nicemann','Orator',88,'Bob','EU',17,6009),(6982,'Max','Airstriker',96,'Paul','JP',2,6982),(7488,'Fallen','Slayer',99,'Aiden','EU',1,7488),(8008,'Pheonix','Reviver',69,'Rachael','EU',13,8008);
 /*!40000 ALTER TABLE `information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +66,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES ('Worlds','2023-07-07','team1',2000000),('LCK','2024-03-24','team2',750000),('ZeyPlay','2023-12-01','team2',250000),('DPC NA','2024-01-01','team1',500000),('Scrims','2023-06-13','team1',9000);
+INSERT INTO `schedule` VALUES ('Worlds','2023-07-07','team1',2000000),('LCK','2024-03-24','team2',750000),('ZeyPlay','2023-12-01','team2',250000),('DPC NA','2024-01-01','team1',500000),('Scrims','2023-06-13','team1',9000),('Sensus24','2024-03-03','Team2',30000);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `team1` (
 
 LOCK TABLES `team1` WRITE;
 /*!40000 ALTER TABLE `team1` DISABLE KEYS */;
-INSERT INTO `team1` VALUES (5562,'Fowl','Marksman',96),(7488,'Fallen','Slayer',99),(6982,'Max','Airstriker',96),(1052,'Thanos','Sidekick',90);
+INSERT INTO `team1` VALUES (5562,'Fowl','Marksman',96),(7488,'Fallen','Slayer',99),(6982,'Max','Airstriker',96),(3607,'Pain','Survivor',92);
 /*!40000 ALTER TABLE `team1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `team2` (
 
 LOCK TABLES `team2` WRITE;
 /*!40000 ALTER TABLE `team2` DISABLE KEYS */;
-INSERT INTO `team2` VALUES (3607,'Pain','Survivor',92),(5256,'Risen','Reviver',86),(4711,'Venerable','Marauder',88),(1111,'Faker','Slayer',100);
+INSERT INTO `team2` VALUES (1052,'Thanos','Sidekick',90),(5256,'Risen','Reviver',86),(4711,'Venerable','Marauder',71),(1111,'Faker','Slayer',100);
 /*!40000 ALTER TABLE `team2` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -129,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-26 10:32:51
+-- Dump completed on 2023-10-03 16:39:08
