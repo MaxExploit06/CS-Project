@@ -1,8 +1,9 @@
 import hashlib
 import logging
+import os
 
 # Initialize the logger
-logging.basicConfig(filename='D:\\Project\\login_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+'\\CS-Project\\login_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -13,11 +14,11 @@ def hash_password(password):
     return hashlib.md5(password.encode()).hexdigest()
 
 def register_user(username, password):
-    with open('D:\\Project\\user_accounts.txt', 'a') as file:
+    with open(os.getcwd()+'\\CS-Project\\login_log.txt', 'a') as file:
         file.write(f"{username}:{hash_password(password)}\n")
 
 def login(username, password):
-    with open('D:\\Project\\user_accounts.txt', 'r') as file:
+    with open(os.getcwd()+'\\CS-Project\\login_log.txt', 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
@@ -27,12 +28,12 @@ def login(username, password):
     return False
 
 
-'''username = input('username')
+username = input('username')
 password = input('password')
 if username and password:
-    register_user(username, password)'''
+    register_user(username, password)
     
-
+'''
 username = input('username')
 password = input('password')
 if username and password:
@@ -41,4 +42,4 @@ if username and password:
     else:
         print("Login failed")
 else:
-    print("Please enter both username and password")
+    print("Please enter both username and password")'''

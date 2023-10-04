@@ -23,7 +23,7 @@ mydb.autocommit = True
 #root
 root=tb.Window()
 root.title('eSports Management System')
-root.iconbitmap(os.getcwd()+"\\Graphics\\EMS.ico")
+root.iconbitmap(os.getcwd()+"\\CS-Project\\Graphics\\EMS.ico")
 root.geometry('960x540')
 tb.Style(theme="cyborg") ; t=0
 colors=root.style.colors
@@ -32,33 +32,33 @@ colors=root.style.colors
 pygame.mixer.init()
 
 def click():
-    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\click.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\click.mp3")
     pygame.mixer.music.play(loops=0)
 
 #Images
-admin1=Image.open(os.getcwd()+"\\Graphics\\admin.png")
-player1=Image.open(os.getcwd()+"\\Graphics\\player.png")
+admin1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\admin.png")
+player1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\player.png")
 resized_admin = admin1.resize((200, 200))
 resized_player = player1.resize((200, 200))
 admin=ImageTk.PhotoImage(resized_admin)
 player=ImageTk.PhotoImage(resized_player)
 
-see1=Image.open(os.getcwd()+"\\Graphics\\see.png")
-hide1=Image.open(os.getcwd()+"\\Graphics\\hide.png")
+see1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\see.png")
+hide1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\hide.png")
 resized_see = see1.resize((16, 16))
 resized_hide = hide1.resize((16, 16))
 
-search1=Image.open(os.getcwd()+"\\Graphics\\search.png")
+search1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search.png")
 resized_search = search1.resize((16, 16))
 isearch=ImageTk.PhotoImage(resized_search)
-search2=Image.open(os.getcwd()+"\\Graphics\\search_w.png")
+search2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\search_w.png")
 resized_search2 = search2.resize((16, 16))
 isearch_white=ImageTk.PhotoImage(resized_search2)
 
-send1=Image.open(os.getcwd()+"\\Graphics\\send.png")
+send1=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send.png")
 resized_send = send1.resize((16, 16))
 isend=ImageTk.PhotoImage(resized_send)
-send2=Image.open(os.getcwd()+"\\Graphics\\send_w.png")
+send2=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\send_w.png")
 resized_send2 = send2.resize((16, 16))
 isend_white=ImageTk.PhotoImage(resized_send2)
 
@@ -91,11 +91,11 @@ inverted_hide= Image.merge('RGBA', (R3,G3,B3,a3))
 see= ImageTk.PhotoImage(inverted_see)
 hide= ImageTk.PhotoImage(inverted_hide)
 
-wpDark=Image.open(os.getcwd()+"\\Graphics\\wp_Dark.jpg")
+wpDark=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Dark.jpg")
 resized_wpDark=wpDark.resize((960,540))
 wp1= ImageTk.PhotoImage(resized_wpDark)
 
-wpLight=Image.open(os.getcwd()+"\\Graphics\\wp_Light.jpg")
+wpLight=Image.open(os.getcwd()+"\\CS-Project\\Graphics\\wp_Light.jpg")
 resized_wpLight=wpLight.resize((960,540))
 wp2= ImageTk.PhotoImage(resized_wpLight)
 
@@ -120,6 +120,9 @@ def update_gif(canvas, img, frame_index):
     canvas.itemconfig(bg_img, image=img[frame_index])
     if frame_index==56:
         M1.tkraise()
+        M1_1.tkraise()
+        M1_2.tkraise()
+        M1_3.tkraise()
     else:
         root.after(30, update_gif, canvas, img, (frame_index + 1) % len(img))
 
@@ -137,7 +140,7 @@ def GIF1_dark():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -154,7 +157,7 @@ def GIF1_light():
     LA1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -171,7 +174,7 @@ def GIF2_dark():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -188,7 +191,7 @@ def GIF2_light():
     LP1.tkraise()
     global bg_img
     # Load the animated GIF image
-    gif_path = os.getcwd()+"\\Graphics\\loading2.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\loading2.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     # Create a Canvas widget to display the GIF background
@@ -213,7 +216,7 @@ def update_login_gif(label, label2, label3, label4, img, frame_index):
     root.after(40, update_login_gif, label, label2, label3, label4, img, (frame_index + 1) % len(img))
 
 def login_gif():
-    gif_path = os.getcwd()+"\\Graphics\\logif.gif"
+    gif_path = os.getcwd()+"\\CS-Project\\Graphics\\logif.gif"
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(frame) for frame in ImageSequence.Iterator(gif)]
     L1_bg.config(image=frames[0])
@@ -231,7 +234,7 @@ t1=1 ; t2=1
 #other definitions
 def themeswap():
     global t, gif_path
-    pygame.mixer.music.load(os.getcwd()+"\\Graphics\\toggle.mp3")
+    pygame.mixer.music.load(os.getcwd()+"\\CS-Project\\Graphics\\toggle.mp3")
     pygame.mixer.music.play(loops=0)
 
     b_list= [b1,b2,b3,b4,b5,b6,b7,b8,b9,b6_1,b6_2,b6_2_1,b6_2_2,b_reset6,b_reset8,submit4,submit5,submit6_1,submit6_1a,
@@ -240,13 +243,14 @@ def themeswap():
 
     e_list= [pe1,pe2,pe3,pe4,pe5,pe6,pe7,ume1,ume4,e6_1,e6_2,e6_1a,e6_2a,s_tag,tag_entry,up_entry,tag_entry9]
 
+    wp_list= (MP_bg,M1_bg,f1_bg,f2_bg,f4_bg,f5_bg,f6_bg,f7_bg,f8_bg,f9_bg)
+
     if t==0:
         sty=tb.Style(theme="cosmo")
         sty.configure("info.TLabel",background="black")
         sty.configure("info.Outline.TButton",background="black")
         sty.configure("info.TEntry", fieldbackground='black', foreground='white')
 
-        MP_bg.config(image=wp2)
         themebutton1.config(bootstyle='dark, outline')
         themebutton2.config(bootstyle='dark, outline')
          
@@ -254,6 +258,8 @@ def themeswap():
             i.config(style="danger.Outline.TButton")
         for j in e_list:
             j.config(style="danger.TEntry")
+        for k in wp_list:
+            k.config(image=wp2)
 
         meter1.configure(bootstyle='danger')
         meter2.configure(bootstyle='danger')
@@ -271,14 +277,15 @@ def themeswap():
         sty.configure("info.Outline.TButton",background="black")
         sty.configure("info.TEntry", fieldbackground='black', foreground='white')
 
-        MP_bg.config(image= wp1)
         themebutton1.config(bootstyle='light, outline')
         themebutton2.config(bootstyle='light, outline')
 
         for i in b_list:
             i.config(style="info.Outline.TButton")
         for j in e_list:
-            j.config(style="danger.TEntry")
+            j.config(style="info.TEntry")
+        for k in wp_list:
+            k.config(image=wp1)
 
         meter1.configure(bootstyle='info')
         meter2.configure(bootstyle='info')
@@ -343,7 +350,7 @@ def on_click(event):
 
 #Account system
 
-logging.basicConfig(filename=os.getcwd()+"\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename=os.getcwd()+"\\CS-Project\\login_log.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log_login_attempt(username, success=True):
     status = "success" if success else "failed"
@@ -353,11 +360,11 @@ def hash_password(password):
     return hashlib.md5(password.encode()).hexdigest()
 
 '''def register_user(username, password):
-    with open('user_accounts.txt', 'a') as file:
+    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'a') as file:
         file.write(f"{username}:{hash_password(password)}\n")'''
 
 def login(username, password):
-    with open(os.getcwd()+"\\user_accounts.txt", 'r') as file:
+    with open(os.getcwd()+"\\CS-Project\\user_accounts.txt", 'r') as file:
         for line in file:
             stored_username, stored_password = line.strip().split(':')
             if username == stored_username and hash_password(password) == stored_password:
@@ -468,6 +475,15 @@ def f5_swap():
 def f6_swap():
     click()
     f6.tkraise()
+    f6_1.tkraise()
+    f6_1_1.tkraise()
+    f6_1_1_1.tkraise()
+    f6_1_1_1a.tkraise()
+    f6_1_1_1b.tkraise()
+    f6_1_2.tkraise()
+    f6_1_2_1.tkraise()
+    f6_1_2_1a.tkraise()
+    f6_1_2_1b.tkraise()
 def f7_swap():
     click()
     f7.tkraise()
@@ -485,19 +501,31 @@ def fmainmenu1():
     area.delete("1.0", END)
     area.config(state='disable')
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu2():
     click()
     table2.forget()
     area2.pack()
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu3():
     click()
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu4():
     click()
     for entry in [pe1,pe2,pe3,pe4,pe5,pe6,pe7]:
         entry.delete(0, 'end')
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu5():
     click()
     for entry in [ume1,ume4]:
@@ -506,9 +534,15 @@ def fmainmenu5():
     ume2.entry.insert(0, ume2._startdate.strftime(ume2._dateformat))
     ume3.set('')
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu6():
     reset6()
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu7():
     click()
     s_tag.delete(0, 'end')
@@ -516,13 +550,22 @@ def fmainmenu7():
     s_tag.config(foreground='grey')
     outputframe7.forget()
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu8():
     reset8()
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 def fmainmenu9():
     click()
     tag_entry9.delete(0, 'end')
     M1.tkraise()
+    M1_1.tkraise()
+    M1_2.tkraise()
+    M1_3.tkraise()
 
 #sql connectivity functions
 um_content=''
@@ -730,7 +773,7 @@ def ab2():
         root.after(2000, messageclear, fail6_1)    
 def ac():
     click()
-    f6_1_2.pack()
+    f6_1_2.pack(pady=8)
     b6_2.config(state='disabled')
     b6_1.config(command=nope)
 def ad1():
@@ -976,7 +1019,7 @@ load2=tb.Label(LP1)
 
 #MP items
 MP_bg=tb.Label(MP,image=wp1)
-MP_title=tb.Label(MP, text= 'Welcome')
+MP_title=tb.Label(MP, text= 'Welcome', font=f_times)
 outputframe=tb.Frame(MP)
 
 MP_ope1=tb.Text(outputframe, height=1, width=20, state='disabled')
@@ -1013,7 +1056,7 @@ MP_opl6.grid(row= 5, column= 0)
 MP_opl7.grid(row= 6, column= 0)
 
 MP_bg.place(x=0,y=0)
-MP_title.pack()
+MP_title.pack(pady=(100,10))
 outputframe.pack()
 MP_logout.pack(side='left',anchor='sw', padx=5, pady=5)
 themebutton2.pack(side='right', anchor='se', padx=5, pady=5)
@@ -1024,6 +1067,7 @@ M1_1=tb.Frame(M1)
 M1_2=tb.Frame(M1)
 M1_3=tb.Frame(M1)
 
+M1_bg=tb.Label(M1, image=wp1)
 b1=tb.Button(M1_1, text='Display upcoming matches', command=f1_swap,style="info.Outline.TButton")
 b2=tb.Button(M1_1, text='Display team', command=f2_swap,style="info.Outline.TButton")
 b3=tb.Button(M1_1, text='Display team score', command=f3_swap,style="info.Outline.TButton")
@@ -1038,23 +1082,25 @@ themebutton1=tb.Button(M1, bootstyle="light, outline",text="Switch Theme", comma
 M1_title=tb.Label(M1, text='ESPORTS MANAGEMENT SYSTEM', font=f_helvetica, relief='groove', padding=5)
 M1_logout=tb.Button(M1, style='danger.Outline.TButton', text='LOGOUT', command=logout)
 
-b1.pack(side='left',pady=(30,5),padx=5)
-b2.pack(side='left',pady=(30,5),padx=5)
-b3.pack(side='left',pady=(30,5),padx=5)
-b4.pack(side='left',pady=(0,5),padx=5)
-b5.pack(side='left',pady=(0,5),padx=5)
-b6.pack(side='left',pady=(0,5),padx=5)
-b7.pack(side='left',pady=(0,5),padx=5)
-b8.pack(side='left',pady=(0,5),padx=5)
-b9.pack(side='left',pady=(0,5),padx=5)
-M1_title.pack(pady=20)
-M1_1.pack()
-M1_2.pack()
-M1_3.pack()
+M1_bg.place(x=0,y=0)
+b1.pack(side='left',padx=5)
+b2.pack(side='left',padx=5)
+b3.pack(side='left',padx=5)
+b4.pack(side='left',padx=5)
+b5.pack(side='left',padx=5)
+b6.pack(side='left',padx=5)
+b7.pack(side='left',padx=5)
+b8.pack(side='left',padx=5)
+b9.pack(side='left',padx=5)
+M1_title.pack(pady=(70,50))
+M1_1.pack(pady=(30,5))
+M1_2.pack(pady=(0,5))
+M1_3.pack(pady=(0,5))
 M1_logout.pack(side='left', anchor='sw', padx=5, pady=5)
 themebutton1.pack(side='right', anchor='se', padx=5, pady=5)
 
 #f1 items
+f1_bg=tb.Label(f1,image=wp1)
 f1_title=tb.Label(f1, text='Upcoming Matches', font=f_verdana, relief='groove', padding=2)
 f1_title1=tb.Label(f1, text='Select a team to view their upcoming matches',font=f_trebuchet)
 f1_1=tb.Frame(f1)
@@ -1063,15 +1109,17 @@ team2=tb.Button(f1_1, style='info.Outline.TButton', text='Team 2', command=lambd
 area=tb.Text(f1, height= 15, width= 52, relief='sunken', state='disable')
 mainmenu1=tb.Button(f1, style='info.Outline.TButton', text='Main Menu', command=fmainmenu1)
 
+f1_bg.place(x=0,y=0)
 f1_title.pack(pady=20)
 f1_title1.pack(pady=(0,10))
-team1.pack(side='left',padx=8,pady=8)
+team1.pack(side='left')
 team2.pack(side='left')
-f1_1.pack()
+f1_1.pack(pady=5)
 area.pack()
 mainmenu1.pack(side='bottom')
 
 #f2 items
+f2_bg=tb.Label(f2,image=wp1)
 f2_title=tb.Label(f2, text='Display Team', font=f_verdana, relief='groove', padding=2)
 f2_title1=tb.Label(f2, text='Select a team to view members',font=f_trebuchet)
 f2_1=tb.Frame(f2)
@@ -1093,15 +1141,18 @@ table2=Tableview(
 )
 mainmenu2=tb.Button(f2, style='info.Outline.TButton', text='Main Menu', command=fmainmenu2)
 
+f2_bg.place(x=0,y=0)
 f2_title.pack(pady=20)
 f2_title1.pack(pady=(0,10))
-dteam1.pack(side='left',pady=8,padx=8)
+dteam1.pack(side='left')
 dteam2.pack(side='left')
-f2_1.pack()
+f2_1.pack(pady=8)
 area2.pack()
 mainmenu2.pack(side='bottom')
 
 #f3 items
+
+# f3_bg=tb.Label(f3,image=wp1)
 f3_title=tb.Label(f3, text='Display Team Score', font=f_verdana, relief='groove', padding=2)
 f3_title1=tb.Label(f3, text='Select a team to view team score',font=f_trebuchet)
 f3_1=tb.Frame(f3)
@@ -1116,6 +1167,7 @@ meter2=tb.Meter(meters, bootstyle='info', subtext='TEAM 2', interactive=False, t
               metertype='semi', amounttotal=400, amountused=0)
 refresh=tb.Button(f3, text= 'Refresh', command= team_score_update, style="info.Outline.TButton")
 
+# f3_bg.place(x=0,y=0)
 f3_title.pack(pady=20)
 f3_title1.pack(pady=(0,10))
 '''steam1.pack(side='left')
@@ -1129,7 +1181,8 @@ mainmenu3.pack(side='bottom')
 refresh.pack(side='bottom',pady=5)
 
 #f4 items
-entryframe4=tb.Frame(f4)
+f4_bg=tb.Label(f4,image=wp1)
+entryframe4=tb.Frame(f4,border=2, borderwidth=2)
 f4_title=tb.Label(f4, text='Add Player', font=f_verdana, relief='groove', padding=2)
 f4_title1=tb.Label(f4, text='Input Details',font=f_trebuchet)
 pe1=tb.Entry(entryframe4, style="info.TEntry")
@@ -1151,8 +1204,8 @@ success4=tb.Label(f4, text='Added succesfully',font=f_arial)
 fail4=tb.Label(f4, text='Unsuccesful',font=f_arial)
 mainmenu4=tb.Button(f4, style='info.Outline.TButton', text='Main Menu', command=fmainmenu4)
 
-
-f4_title.pack(pady=20)
+f4_bg.place(x=0,y=0)
+f4_title.pack(pady=(20,50))
 f4_title1.pack(pady=(0,10))
 
 pe1.grid(row= 0, column= 1)
@@ -1175,6 +1228,7 @@ submit4.pack(pady=20)
 mainmenu4.pack(side='bottom')
 
 #f5 items
+f5_bg=tb.Label(f5,image=wp1)
 teams=['team1', 'team2']
 entryframe5=tb.Frame(f5)
 f5_title=tb.Label(f5, text='Add Upcoming Matches', font=f_verdana, relief='groove', padding=2)
@@ -1192,16 +1246,14 @@ uml2=tb.Label(entryframe5, text='Date',font=f_trebuchet)
 uml3=tb.Label(entryframe5, text='Participants',font=f_trebuchet)
 uml4=tb.Label(entryframe5, text='Prize',font=f_trebuchet)
 
-
-
 submit5=tb.Button(f5, style='info.Outline.TButton', text='Submit', command=addum)
 success5=tb.Label(f5, text='Added succesfully',font=f_arial)
 fail5_1=tb.Label(f5, text='Unsuccesful',font=f_arial)
 fail5_2=tb.Label(f5, text='Select a team',font=f_arial)
 mainmenu5=tb.Button(f5, style='info.Outline.TButton', text='Main Menu', command=fmainmenu5)
 
-
-f5_title.pack(pady=20)
+f5_bg.place(x=0,y=0)
+f5_title.pack(pady=(50,60))
 f5_title1.pack(pady=(0,10))
 
 ume1.grid(row= 0, column= 1)
@@ -1228,6 +1280,7 @@ f6_1_2_1=tb.Frame(f6)
 f6_1_2_1a=tb.Frame(f6_1_2_1)
 f6_1_2_1b=tb.Frame(f6_1_2_1)
 
+f6_bg=tb.Label(f6,image=wp1)
 b6_1=tb.Button(f6_1, text='Between Teams', command=aa,style="info.Outline.TButton")
 b6_2=tb.Button(f6_1, text='From Reserve to Teams', command=ac,style="info.Outline.TButton")
 l6_1=tb.Label(f6_1_1_1a,text="Enter Tag of player to swap from Team 1    ",font=f_trebuchet)
@@ -1249,31 +1302,33 @@ fail6_1=tb.Label(f6, text='Fill in both',font=f_arial)
 b_reset6=tb.Button(f6, text='Reset selection', command=reset6, style="info.Outline.TButton")
 mainmenu6=tb.Button(f6, style='info.Outline.TButton', text='Main Menu', command=fmainmenu6)
 
-b6_1.pack(side='left',padx=8,pady=8)
+f6_bg.place(x=0,y=0)
+b6_1.pack(side='left')
 b6_2.pack(side='left')
-l6_1.pack(side='top',pady=5)
+l6_1.pack(side='top')
 e6_1.pack(side='left')
-f6_1_1_1a.pack(side='left')
-l6_2.pack(side='top',pady=5)
+f6_1_1_1a.pack(side='left',pady=5)
+l6_2.pack(side='top')
 e6_2.pack(side='left')
-f6_1_1_1b.pack(side='left')
+f6_1_1_1b.pack(side='left',pady=5)
 submit6_1.pack(pady=(40,0))
-b6_2_1.pack(side='left',padx=8,pady=8)
+b6_2_1.pack(side='left')
 b6_2_2.pack(side='left')
-l6_1a.pack(side='top',pady=5)
+l6_1a.pack(side='top')
 e6_1a.pack(side='left')
-f6_1_2_1a.pack(side='left')
-l6_2a.pack(side='top',pady=5)
+f6_1_2_1a.pack(side='left',pady=5)
+l6_2a.pack(side='top')
 e6_2a.pack(side='left')
-f6_1_2_1b.pack(side='left')
+f6_1_2_1b.pack(side='left',pady=5)
 submit6_1a.pack(pady=(40,0))
 
 f6_title.pack(pady=20)
-f6_1.pack()
+f6_1.pack(pady=8)
 mainmenu6.pack(side='bottom')
 b_reset6.pack(side='bottom',pady=5)
 
 #f7 items
+f7_bg=tb.Label(f7,image=wp1)
 outputframe7=tb.Frame(f7)
 searchbar=tb.Frame(f7)
 f7_title=tb.Label(f7, text='Search Players', font=f_verdana, relief='groove',padding=2)
@@ -1318,13 +1373,15 @@ opl5.grid(row= 4, column= 0)
 opl6.grid(row= 5, column= 0)
 opl7.grid(row= 6, column= 0)
 
+f7_bg.place(x=0,y=0)
 f7_title.pack(pady=20)
-s_tag.pack(side='left',pady=(0,25))
-s_button.pack(side='left',pady=(0,25))
-searchbar.pack()
+s_tag.pack(side='left')
+s_button.pack(side='left')
+searchbar.pack(pady=(0,25))
 mainmenu7.pack(side='bottom')
 
 #f8 items
+f8_bg=tb.Label(f8,image=wp1)
 buttonframe=tb.Frame(f8)
 entryframe8_1=tb.Frame(f8)
 entryframe8_2=tb.Frame(f8)
@@ -1351,26 +1408,28 @@ success8=tb.Label(f8, text='Update successful',font=f_arial)
 b_reset8=tb.Button(f8, text='Reset selection', command=reset8,style="info.Outline.TButton")
 mainmenu8=tb.Button(f8, style='info.Outline.TButton', text='Main Menu', command=fmainmenu8)
 
-c_1.grid(row= 0,column= 0,pady=(30,5),padx=5)
-c_2.grid(row= 0,column= 1,pady=(30,5),padx=5)
-c_3.grid(row= 0,column= 2,pady=(30,5),padx=5)
-c_4.grid(row= 1,column= 0,pady=(0,30),padx=5)
-c_5.grid(row= 1,column= 1,pady=(0,30),padx=5)
-c_6.grid(row= 1,column= 2,pady=(0,30),padx=5)
+c_1.grid(row= 0,column= 0,pady=(0,5),padx=5)
+c_2.grid(row= 0,column= 1,pady=(0,5),padx=5)
+c_3.grid(row= 0,column= 2,pady=(0,5),padx=5)
+c_4.grid(row= 1,column= 0,padx=5)
+c_5.grid(row= 1,column= 1,padx=5)
+c_6.grid(row= 1,column= 2,padx=5)
 
+f8_bg.place(x=0,y=0)
 tag_label.pack(side='left')
 tag_entry.pack(side='left')
 tag_submit.pack(side='left')
 up_label.pack(side='left')
 up_entry.pack(side='left')
 up_submit.pack(side='left')
-f8_title.pack(pady=20)
+f8_title.pack(pady=(30,40))
 f8_title1.pack(pady=(0,10))
-buttonframe.pack()
+buttonframe.pack(pady=30)
 mainmenu8.pack(side='bottom')
 b_reset8.pack(side='bottom')
 
 #f9 items
+f9_bg=tb.Label(f9,image=wp1)
 entryframe9=tb.Frame(f9)
 f9_title=tb.Label(f9, text='Remove player', font=f_verdana, relief='groove', padding=2)
 f9_title1=tb.Label(f9, text='Note- Players playing for either teams cannot be removed.',font=f_trebuchet)
@@ -1383,10 +1442,11 @@ success9=tb.Label(f9, text='Player removed successfully',font=f_arial)
 tag_submit9=tb.Button(entryframe9, style='info.Outline.TButton', image=isend_white, command=remove)
 mainmenu9=tb.Button(f9, style='info.Outline.TButton', text='Main Menu', command=fmainmenu9)
 
+f9_bg.place(x=0,y=0)
 tag_label9.pack(side='left')
 tag_entry9.pack(side='left')
 tag_submit9.pack(side='left')
-f9_title.pack(pady=20)
+f9_title.pack(pady=(50,110))
 f9_title1.pack(pady=(0,10))
 entryframe9.pack()
 mainmenu9.pack(side='bottom')
